@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset='utf-8'/>
     <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
@@ -10,7 +9,6 @@
 
     <title>Sensorflare API reference</title>
 </head>
-
 <body>
 
 <!-- HEADER -->
@@ -18,7 +16,7 @@
     <header class="inner">
         <a id="forkme_banner" href="https://github.com/amaxilat/sensorflare-api">View on GitHub</a>
 
-        <h1 id="project_title">Sensorflare API reference: AAA</h1>
+        <h1 id="project_title">Sensorflare API reference: Schedules</h1>
 
         <h2 id="project_tagline"></h2>
 
@@ -30,28 +28,43 @@
 </div>
 
 <!-- MAIN CONTENT -->
+
 <div id="main_content_wrap" class="outer">
     <section id="main_content" class="inner">
 
         <h3>
-	    <span class="octicon octicon-link"></span>
-	    AAA API
-	</h3>
-        
+            <span class="octicon octicon-link"></span>
+            Dashboards API
+        </h3>
+
         <p>
-        used to authenticate users and manage permissions on actions and resources.</li>
+            used to retrieve information about user schedules.
         </p>
+
+
+        <p class="heading" style="font-variant: small-caps;">Add a Schedule to the system</p>
+        <pre><code>GET /api/schedule</code></pre>
+        <p class="description">
+            Returns a JSONArray with all the information about the Schedule added to the system.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">Lists all existing schedules</p>
+        <pre><code>GET /api/schedule</code></pre>
+        <p class="description">
+            Returns a JSONArray with all the Schedules for a specific user.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">Delete a Schedule</p>
+        <pre><code>GET /api/schedule/{SCHEDULE_ID}</code></pre>
+        <p class="description">
+            Returns <code>{"status":"OK","code":200}</code> if the specified Schedule was deleted successfully, otherwise returns <code>"error"</code>.
+        </p>
+
 
     </section>
 </div>
 
 
-<pre><code>$ cd your_repo_root/repo_name
-    $ git fetch origin
-    $ git checkout gh-pages</code></pre>
-
-    
-    
 <!-- FOOTER  -->
 <div id="footer_wrap" class="outer">
     <footer class="inner">
@@ -63,7 +76,6 @@
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
     </footer>
 </div>
-
 
 </body>
 </html>

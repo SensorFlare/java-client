@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset='utf-8'/>
     <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
@@ -10,7 +9,6 @@
 
     <title>Sensorflare API reference</title>
 </head>
-
 <body>
 
 <!-- HEADER -->
@@ -18,7 +16,7 @@
     <header class="inner">
         <a id="forkme_banner" href="https://github.com/amaxilat/sensorflare-api">View on GitHub</a>
 
-        <h1 id="project_title">Sensorflare API reference: AAA</h1>
+        <h1 id="project_title">Sensorflare API reference: Applications</h1>
 
         <h2 id="project_tagline"></h2>
 
@@ -30,28 +28,47 @@
 </div>
 
 <!-- MAIN CONTENT -->
+
 <div id="main_content_wrap" class="outer">
     <section id="main_content" class="inner">
 
         <h3>
-	    <span class="octicon octicon-link"></span>
-	    AAA API
-	</h3>
-        
+            <span class="octicon octicon-link"></span>
+            Applications API
+        </h3>
+
         <p>
-        used to authenticate users and manage permissions on actions and resources.</li>
+            used to retrieve information about user applications.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;"> List All Available Applications</p>
+        <pre><code>GET /api/application</code></pre>
+        <p class="description">
+            Returns a JSONArray with all the Applications deployed by the user.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;"> Get Summary Of Application</p>
+        <pre><code>GET /api/application/{ID}</code></pre>
+        <p class="description">
+            Returns information about the specified Application.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;"> Create Application </p>
+        <pre><code>GET /api/application/create</code></pre>
+        <p class="description">
+            Returns information about the created Application.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;"> Delete Application </p>
+        <pre><code>GET /api/application/delete</code></pre>
+        <p class="description">
+            Returns ok if the specified Application was deleted successfully.
         </p>
 
     </section>
 </div>
 
 
-<pre><code>$ cd your_repo_root/repo_name
-    $ git fetch origin
-    $ git checkout gh-pages</code></pre>
-
-    
-    
 <!-- FOOTER  -->
 <div id="footer_wrap" class="outer">
     <footer class="inner">
@@ -63,7 +80,6 @@
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
     </footer>
 </div>
-
 
 </body>
 </html>

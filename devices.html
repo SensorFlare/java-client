@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset='utf-8'/>
     <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
@@ -10,7 +9,6 @@
 
     <title>Sensorflare API reference</title>
 </head>
-
 <body>
 
 <!-- HEADER -->
@@ -18,7 +16,7 @@
     <header class="inner">
         <a id="forkme_banner" href="https://github.com/amaxilat/sensorflare-api">View on GitHub</a>
 
-        <h1 id="project_title">Sensorflare API reference: AAA</h1>
+        <h1 id="project_title">Sensorflare API reference: Devices</h1>
 
         <h2 id="project_tagline"></h2>
 
@@ -30,28 +28,46 @@
 </div>
 
 <!-- MAIN CONTENT -->
+
 <div id="main_content_wrap" class="outer">
     <section id="main_content" class="inner">
 
         <h3>
-	    <span class="octicon octicon-link"></span>
-	    AAA API
-	</h3>
-        
+            <span class="octicon octicon-link"></span>
+            Dashboards API
+        </h3>
+
         <p>
-        used to authenticate users and manage permissions on actions and resources.</li>
+            used to retrieve information about user devices.
         </p>
+
+        <p class="heading" style="font-variant: small-caps;">Add Property To Gateway</p>
+        <pre><code>GET /api/gateway/**</code></pre>
+        <p class="description">
+            Returns <code>{"status":"OK","code":200}</code> if the Property is added successfully to the Gateway.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">View Information Of A Gateway</p>
+        <pre><code>GET /api/gateway/**</code></pre>
+        <p class="description">
+            Returns a JSONArray with all the information about the specified Gateway.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">List All The Devices Of The User</p>
+        <pre><code>GET /api/device</code></pre>
+        <p class="description">
+            Returns a JSONArray with all the Devices of the user.
+        </p>
+
+
+
+
+
 
     </section>
 </div>
 
 
-<pre><code>$ cd your_repo_root/repo_name
-    $ git fetch origin
-    $ git checkout gh-pages</code></pre>
-
-    
-    
 <!-- FOOTER  -->
 <div id="footer_wrap" class="outer">
     <footer class="inner">
@@ -63,7 +79,6 @@
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
     </footer>
 </div>
-
 
 </body>
 </html>

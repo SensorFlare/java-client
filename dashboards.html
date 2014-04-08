@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="description" content="Www-sensorflare : "/>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Sensorflare API reference</title>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+        <a id="forkme_banner" href="https://github.com/amaxilat/sensorflare-api">View on GitHub</a>
+
+        <h1 id="project_title">Sensorflare API reference: Dashboards</h1>
+
+        <h2 id="project_tagline"></h2>
+
+        <section id="downloads">
+            <a class="zip_download_link" href="download.html">Download the Sensorflare Library as zip file</a>
+            <a class="tar_download_link" href="download.html">Download the Sensorflare Library as tar.gz file</a>
+        </section>
+    </header>
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+
+        <h3>
+            <span class="octicon octicon-link"></span>
+            Dashboards API
+        </h3>
+
+        <p>
+            used to retrieve information about user dashboards.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;"> List All Available Dashboard</p>
+        <pre><code>GET /api/dashboard</code></pre>
+        <p class="description">
+            Returns a JSONArray with all the Dashboard created by the user.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">Create Dashboard</p>
+        <pre><code>GET /api/dashboard/create</code></pre>
+        <p class="description">
+            Returns a JSONArray with all the information about the created Dashboard.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">Set Location For A Dashboard</p>
+        <pre><code>GET /api/dashboard/{DASHBOARD_ID}/location</code></pre>
+        <p class="description">
+            Returns <code>{"status":"OK","code":200}</code> if the location is set successfully, otherwise returns <code>"error"</code>.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">Add Resource To Dashboard </p>
+        <pre><code>GET /api/dashboard/add/resource</code></pre>
+        <p class="description">
+            Returns <code>{"status":"OK","code":200}</code> if the specified IoT Resource is added successfully, otherwise returns <code>"error"</code>.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">Add Application To Dashboard</p>
+        <pre><code>GET /api/dashboard/add/application</code></pre>
+        <p class="description">
+            Returns <code>{"status":"OK","code":200}</code> if the specified Application is added successfully, otherwise returns <code>"error"</code>.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">Remove Application From Dashboard</p>
+        <pre><code>GET /api/dashboard/remove/application</code></pre>
+        <p class="description">
+            Returns <code>{"status":"OK","code":200}</code> if the specified Application is removed successfully, otherwise returns <code>"error"</code>.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">List all Components A Dashboard</p>
+        <pre><code>GET /api/dashboard/{DASHBOARD_ID}</code></pre>
+        <p class="description">
+            Returns a JSONArray with all the components of the specified Dashboard.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">Delete Dashboard</p>
+        <pre><code>GET /api/dashboard/delete</code></pre>
+        <p class="description">
+            Returns <code>{"status":"OK","code":200}</code> if the specified Dashboard was deleted successfully, otherwise returns <code>"error"</code>.
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">Dashboard Disconnect</p>
+        <pre><code>GET /api/dashboard/{siteId}/disconnect/**</code></pre>
+        <p class="description">
+
+        </p>
+
+        <p class="heading" style="font-variant: small-caps;">Dashboard Featured</p>
+        <pre><code>GET /api/dashboard/{siteId}/featured/**</code></pre>
+        <p class="description">
+
+        </p>
+
+
+        <p class="heading" style="font-variant: small-caps;"> List All Resources of a Dashboard</p>
+        <pre><code>GET /api/dashboard/{DASHBOARD_NAME}/resource</code></pre>
+        <p class="description">
+            Returns a JSONArray with all the IoT Resources added to the specified Dashboard.
+        </p>
+
+
+        <p class="heading" style="font-variant: small-caps;"> List All Applications of a Dashboard</p>
+        <pre><code>GET /api/dashboard/{DASHBOARD_NAME}/application</code></pre>
+        <p class="description">
+            Returns a JSONArray with all the Applications deployed by the user.
+        </p>
+
+
+
+
+
+
+
+
+    </section>
+</div>
+
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+    <footer class="inner">
+        <p><a name="support-or-contact" class="anchor" href="#support-or-contact"><span
+                class="octicon octicon-link"></span></a>Support or Contact: Having trouble with Pages? Check out the
+            documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a
+                    href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+    </footer>
+</div>
+
+</body>
+</html>

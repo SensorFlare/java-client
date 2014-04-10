@@ -58,7 +58,17 @@
             Returns a JSONObject with the latest information concerning the IoT Resource.
         </p>
 
+        <p class="heading" style="font-variant: small-caps;"> Clear all properties of a Resource</p>
+        <pre><code>GET /api/resource/clear/**</code></pre>
+        <p class="description">
+            Returns <code>{"status":"OK","code":200}</code> if the properties are deleted successfully, otherwise returns <code>"error"</code>.
+        </p>
 
+        <p class="heading" style="font-variant: small-caps;"> Delete Information Of A Resource</p>
+        <pre><code>GET /api/resource/**</code></pre>
+        <p class="description">
+            Returns <code>{"status":"OK","code":200}</code> if information was deleted successfully, otherwise returns <code>"error"</code>.
+        </p>
 
 
     </section>

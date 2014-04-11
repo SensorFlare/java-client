@@ -48,21 +48,15 @@
         </p>
 
         <p class="heading" style="font-variant: small-caps;"> Get Summary Of Application</p>
-        <pre><code>GET /api/application/{ID}</code></pre>
+        <pre><code>GET /api/application/{applicationId}</code></pre>
         <p class="description">
             Returns information about the specified Application.
         </p>
 
-        <p class="heading" style="font-variant: small-caps;"> Create Application </p>
-        <pre><code>GET /api/application/create</code></pre>
-        <p class="description">
-            Returns information about the created Application.
-        </p>
-
         <p class="heading" style="font-variant: small-caps;"> Delete Application </p>
-        <pre><code>GET /api/application/delete</code></pre>
+        <pre><code>GET /api/application/delete/{applicationId}</code></pre>
         <p class="description">
-            Returns ok if the specified Application was deleted successfully.
+            Returns <code>{"status":"OK","code":200}</code> if the specified Application Is deleted successfully, otherwise returns code>"error"</code>.
         </p>
 
     </section>

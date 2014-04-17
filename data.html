@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset='utf-8'/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
-    <meta name="description" content="Www-sensorflare : "/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="sensorflare: res-api"/>
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
+    <!-- Bootstrap core CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <title>Sensorflare API reference</title>
 </head>
-
 <body>
 
 <!-- HEADER -->
@@ -18,7 +19,7 @@
     <header class="inner">
         <a id="forkme_banner" href="https://github.com/amaxilat/sensorflare-api">View on GitHub</a>
 
-        <h1 id="project_title">Sensorflare API reference: Data</h1>
+        <h1 id="project_title">Sensorflare API</h1>
 
         <h2 id="project_tagline"></h2>
 
@@ -30,21 +31,125 @@
 </div>
 
 <!-- MAIN CONTENT -->
+
 <div id="main_content_wrap" class="outer">
     <section id="main_content" class="inner">
 
         <h3>
             <span class="octicon octicon-link"></span>
-            Data API
+            Accessing Resource Data
         </h3>
 
         <p>
-            used to retrieve information from Sensorflare.
+            The api calls described in this section can be used to retrieve information about user resources
+            (Sensors and Actuators) as well as all the metadata related to them.
         </p>
 
 
-        <p class="heading" style="font-variant: small-caps;"> List all available Resources</p>
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        List All User Resources
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <code>GET /api/resource</code>
 
+                        <p class="description">
+                            Returns a JSONArray with all the IoT Resources accessible by the user (owned or shared with)
+                            and
+                            their user-friendly names when available.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Get Resource Description
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <code>GET /api/resource/{RESOURCE_URI}/description</code>
+
+                        <p class="description">
+                            Returns a JSONArray with all the IoT Resources added to the specified Dashboard.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Get Latest Summary of Resource
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <code>GET /api/resource/{RESOURCE_URI}/report/latest</code>
+
+                        <p class="description">
+                            Returns a JSONObject with the latest information concerning the IoT Resource.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Clear all properties of a Resource
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <code>GET /api/resource/clear/**</code>
+
+                        <p class="description">
+                            Returns a <a href="responses.html">response message</a> based on the result of the api call.
+                            If successful all properties are removed from the Resource.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Delete Information Of A Resource
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <code>DELETE /api/resource/**</code>
+
+                        <p class="description">
+                            Returns a <a href="responses.html">response message</a> based on the result of the api call.
+                            If successful all information related to the resource are permanently deleted from the
+                            system.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </section>
 </div>
@@ -62,6 +167,6 @@
     </footer>
 </div>
 
-
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>

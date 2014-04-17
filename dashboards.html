@@ -6,8 +6,9 @@
     <meta name="description" content="Www-sensorflare : "/>
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Sensorflare API reference</title>
+    <!-- Bootstrap core CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Sensorflare API</title>
 </head>
 <body>
 
@@ -16,7 +17,7 @@
     <header class="inner">
         <a id="forkme_banner" href="https://github.com/amaxilat/sensorflare-api">View on GitHub</a>
 
-        <h1 id="project_title">Sensorflare API reference: Dashboards</h1>
+        <h1 id="project_title">Sensorflare API</h1>
 
         <h2 id="project_tagline"></h2>
 
@@ -56,13 +57,15 @@
         <p class="heading" style="font-variant: small-caps;">Set Location For A Dashboard</p>
         <pre><code>GET api/dashboard/{dashboardId}/location/{longtitude}/{latitude}</code></pre>
         <p class="description">
-            Returns a JSONArray with information about the specified dashboard if the location is set successfully, otherwise returns <code>"error"</code>.
+            Returns a JSONArray with information about the specified dashboard if the location is set successfully,
+            otherwise returns <code>"error"</code>.
         </p>
 
         <p class="heading" style="font-variant: small-caps;">Add Resource To Dashboard </p>
         <pre><code>GET /api/dashboard/{dashbordId}/add/resource/**</code></pre>
         <p class="description">
-            Returns all the information about the Dashboard if the specified IoT Resource is added successfully, otherwise returns <code>"error"</code>.
+            Returns all the information about the Dashboard if the specified IoT Resource is added successfully,
+            otherwise returns <code>"error"</code>.
         </p>
 
 
@@ -75,19 +78,22 @@
         <p class="heading" style="font-variant: small-caps;">Delete Dashboard</p>
         <pre><code>GET /api/dashboard/delete/{dashboardId}</code></pre>
         <p class="description">
-            Returns <code>{"status":"OK","code":200}</code> if the specified Dashboard is deleted successfully, otherwise returns <code>"error"</code>.
+            Returns <code>{"status":"OK","code":200}</code> if the specified Dashboard is deleted successfully,
+            otherwise returns <code>"error"</code>.
         </p>
 
         <p class="heading" style="font-variant: small-caps;">Disconnect Resource from Dashboard</p>
         <pre><code>GET /api/dashboard/{siteId}/disconnect/**</code></pre>
         <p class="description">
-            Returns <code>{"status":"OK","code":200}</code> if the specified Resource is disconnected from Dashboard, otherwise returns <code>"error"</code>.
+            Returns <code>{"status":"OK","code":200}</code> if the specified Resource is disconnected from Dashboard,
+            otherwise returns <code>"error"</code>.
         </p>
 
         <p class="heading" style="font-variant: small-caps;">Feature Resource in Dashboard</p>
         <pre><code>GET /api/dashboard/{siteId}/featured/**</code></pre>
         <p class="description">
-            Returns <code>{"status":"OK","code":200}</code> if the specified Resource is featured in Dashboard, otherwise returns <code>"error"</code>.
+            Returns <code>{"status":"OK","code":200}</code> if the specified Resource is featured in Dashboard,
+            otherwise returns <code>"error"</code>.
         </p>
 
 
@@ -105,7 +111,6 @@
         </p>
 
 
-
     </section>
 </div>
 
@@ -121,6 +126,6 @@
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
     </footer>
 </div>
-
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>

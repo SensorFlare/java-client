@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="sensorflare: res-api"/>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <!-- Bootstrap core CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Sensorflare API reference</title>
+    <style>
+        pre.terminal {
+            background-color: #444;
+            color: #fff;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            -moz-background-clip: padding;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            border: none;
+            position: relative;
+            padding: 10px;
+            text-shadow: none;
+            background-image: none;
+            width: 100%;
+            filter: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+        <a id="forkme_banner" href="https://github.com/amaxilat/sensorflare-api">View on GitHub</a>
+
+        <h1 id="project_title">Sensorflare API</h1>
+
+        <h2 id="project_tagline"></h2>
+
+        <section id="downloads">
+            <a class="zip_download_link" href="download.html">Download the Sensorflare Library as zip file</a>
+            <a class="tar_download_link" href="download.html">Download the Sensorflare Library as tar.gz file</a>
+        </section>
+    </header>
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+
+        <h3>
+            <span class="octicon octicon-link"></span>
+            Accessing Private User Data
+        </h3>
+
+        <p>
+            Requests that require authentication will return <code>{"status":"not found","code":404}</code> in some
+            cases instead of <code>{"status":"forbidden","code":403}</code>. This is to prevent the accidental
+            leakage of private resources to unauthorized users.</li>
+        </p>
+
+        <h3>
+            Basic Authentication
+        </h3>
+
+         Using curl:
+
+                <pre class="terminal">$ curl -u foo:bar http://www.sensorflare.com/api/dashboard</pre>
+            Using Java:
+
+        <pre style="width: 100%">HttpURLConnection con = null;
+try {
+    //Create connection
+    URL url = new URL("http://www.sensorflare.com/api/dashboard");
+    con = (HttpURLConnection) url.openConnection();
+    con.setRequestMethod("GET");
+    BASE64Encoder enc = new sun.misc.BASE64Encoder();
+    String userpassword = username + ":" + password;
+    String encodedAuthorization = enc.encode(userpassword.getBytes());
+    con.setRequestProperty("Authorization", "Basic " +
+    encodedAuthorization);
+    System.out.println("ResponseCode: " + con.getResponseMessage());
+    BufferedReader in =
+        new BufferedReader(new InputStreamReader(con.getInputStream()));
+    String line;
+    while ((line = in.readLine()) != null) {
+        System.out.println(line);
+    }
+} catch (Exception e) {
+    e.printStackTrace();
+} finally {
+    if (con != null) {
+        con.disconnect();
+    }
+}</pre>
+
+        <h3>
+            Authentication Errors
+        </h3>
+
+        When user authentication fails an error messages is provided to the client.
+        <pre style="width: 100%">{
+    "timestamp":1398760457973,
+    "error":"Unauthorized",
+    "status":401,
+    "message":"Bad Credentials"
+}</pre>
+
+
+    </section>
+</div>
+
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+    <footer class="inner">
+        <p><a name="support-or-contact" class="anchor" href="#support-or-contact"><span
+                class="octicon octicon-link"></span></a>Support or Contact: Having trouble with Pages? Check out the
+            documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a
+                    href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+    </footer>
+</div>
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</body>
+</html>

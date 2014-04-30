@@ -159,12 +159,12 @@ p img {
     border: none;
 }
 
-/*
+
 pre, code {
     
     color:#200;
     background-color: #666666;
-
+/*
     width: 80%;
     font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
     font-size: 13px;
@@ -173,9 +173,9 @@ pre, code {
     border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
-
+*/
 }
-
+/*
 pre {
     width: 80%;
     padding: 10px;

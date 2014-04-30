@@ -4,10 +4,14 @@
     <meta charset='utf-8'/>
     <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
     <meta name="description" content="Www-sensorflare : "/>
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <!-- Bootstrap core CSS -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/bootstrap.min.css">
+
+    <script src="javascripts/bootstrap.js"></script>
     <title>Sensorflare API</title>
 </head>
 <body>
@@ -35,7 +39,7 @@
 
         <h3>
             <span class="octicon octicon-link"></span>
-            Dashboards API
+            Schedules API
         </h3>
 
         <p>
@@ -43,25 +47,57 @@
         </p>
 
 
-        <p class="heading" style="font-variant: small-caps;">Add a Schedule to the system</p>
-        <pre><code>GET /api/schedule/{keyName}/{cronSchedule}/{payload}/{after}/{payload2}</code></pre>
-        <p class="description">
-            Returns a JSONArray with all the information about the Schedule added to the system.
-        </p>
+        <div class="bs-example">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Add a Schedule to the system</p></div>
+                <div class="panel-body">
 
-        <p class="heading" style="font-variant: small-caps;">Lists all existing schedules</p>
-        <pre><code>GET /api/schedule</code></pre>
-        <p class="description">
-            Returns a JSONArray with all the Schedules for a specific user.
-        </p>
+                    <pre><code>GET /api/schedule/{keyName}/{cronSchedule}/{payload}/{after}/{payload2}</code></pre>
 
-        <p class="heading" style="font-variant: small-caps;">Delete a Schedule</p>
-        <pre><code>GET /api/schedule/{SCHEDULE_ID}</code></pre>
-        <p class="description">
-            Returns <code>{"status":"OK","code":200}</code> if the specified Schedule was deleted successfully,
-            otherwise returns <code>"error"</code>.
-        </p>
+                    <p>Returns a JSONArray with all the information about the Schedule added to the system.</p>
 
+                    <p>Example</p>
+
+                    <pre></pre>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bs-example">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Lists all existing schedules</p></div>
+                <div class="panel-body">
+
+                    <pre><code>GET /api/schedule</code></pre>
+
+                    <p>Returns a JSONArray with all the Schedules for a specific user.</p>
+
+                    <p>Example</p>
+
+                    <pre></pre>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bs-example">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Delete a Schedule</p></div>
+                <div class="panel-body">
+
+                    <pre><code>GET /api/schedule/{SCHEDULE_ID}</code></pre>
+
+                    <p>Returns <code>{"status":"OK","code":200}</code> if the specified Schedule was deleted successfully,
+                        otherwise returns <code>"error"</code>.</p>
+
+                </div>
+
+            </div>
+        </div>
 
     </section>
 </div>

@@ -59,7 +59,7 @@
 
                     <p>Example</p>
 
-                    <pre><code class="language-javascript"><span class="p">[</span><br><span class="p"> {</span><br><span class="s2">  id: "name"</span><br><span class="p"> }</span><span class="p">,</span><br><span class="p"> ...</span><br><span class="p">]</span></code></pre>
+                    <pre><code class="language-javascript"><span class="p">[</span><br><span class="p"> {</span><br><span class="s2">  1234: "applicationName"</span><br><span class="p"> }</span><span class="p">,</span><br><span class="p"> ...</span><br><span class="p"> ]</span></code></pre>
 
                 </div>
 
@@ -78,7 +78,8 @@
 
                     <p>Example</p>
 
-                    <pre></pre>
+                    <pre><code class="language-javascript"><span class="p">{</span><br><span class="s2">  id: 1234,</span><br><span class="s2">  name: "applicationName",</span><br><span class="s2">  type: "Type",</span><br><span class="s2">  description: "Description"</span><br><span class="p">}</span></code></pre>
+
                 </div>
 
             </div>
@@ -93,7 +94,7 @@
                     <pre><code>GET /api/application/delete/{applicationId}</code></pre>
 
                     <p>Returns <code>{"status":"OK","code":200}</code> if the specified Application Is deleted successfully,
-                        otherwise returns code>"error"</code>.</p>
+                        otherwise returns <code>"error"</code>.</p>
                 </div>
 
             </div>

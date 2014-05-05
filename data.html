@@ -7,9 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="sensorflare: res-api"/>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <!-- Bootstrap core CSS -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/bootstrap.min.css">
+
+
+    <script src="javascripts/bootstrap.js"></script>
     <title>Sensorflare API reference</title>
 </head>
 <body>
@@ -45,109 +51,101 @@
             (Sensors and Actuators) as well as all the metadata related to them.
         </p>
 
-
-        <div class="panel-group">
+        <div class="bs-example">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        List All User Resources
-                    </h4>
-                </div>
-                <div class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <code>GET /api/resource</code>
+                <!-- Default panel contents -->
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">List All User Resources</p></div>
+                <div class="panel-body">
 
-                        <p class="description">
-                            Returns a JSONArray with all the IoT Resources accessible by the user (owned or shared with)
-                            and
-                            their user-friendly names when available.
-                        </p>
+                    <pre><code>GET /api/resource</code></pre>
 
-                    </div>
+                    <p>Returns a JSONArray with all the IoT Resources accessible by the user (owned or shared with) and
+                        their user-friendly names when available.
+                    </p>
+
+                    <p>Example</p>
+
+                    <pre><code class="language-javascript"><span class="p">[</span><br><span class="p"> {</span><br><span class="s2">  resourceUri1: "resourceName1"</span><br><span class="p"> },</span><br><span class="s2">  resourceUri2: "resourceName2"</span><br><span class="p"> },</span><br><span class="s2">  ...</span><br><span class="p"> ]</span></code></pre>
                 </div>
+
             </div>
         </div>
 
-        <div class="panel-group">
+        <div class="bs-example">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Get Resource Description
-                    </h4>
-                </div>
-                <div class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <code>GET /api/resource/{RESOURCE_URI}/description</code>
+                <!-- Default panel contents -->
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Get Resource Description</p></div>
+                <div class="panel-body">
 
-                        <p class="description">
-                            Returns a JSONArray with all the IoT Resources added to the specified Dashboard.
-                        </p>
+                    <pre><code>GET /api/resource/{RESOURCE_URI}/description</code></pre>
 
-                    </div>
+                    <p>
+                        Returns a JSONArray with the description of the specified IoT Resource.
+                    </p>
+
+                    <p>Example</p>
+
+                    <pre><code class="language-javascript"><span class="p">{</span><br><span class="s2">  uom: "Uom",</span><br><span class="s2">  isa: "Sensor",</span><br><span class="s2">  observes: "Atmospheric Pressure"</span><br><span class="p">}</span></code></pre>
+
                 </div>
+
             </div>
         </div>
 
-        <div class="panel-group">
+
+        <div class="bs-example">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Get Latest Summary of Resource
-                    </h4>
-                </div>
-                <div class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <code>GET /api/resource/{RESOURCE_URI}/report/latest</code>
+                <!-- Default panel contents -->
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Get Latest Summary of Resource</p></div>
+                <div class="panel-body">
 
-                        <p class="description">
-                            Returns a JSONObject with the latest information concerning the IoT Resource.
-                        </p>
+                    <pre><code>GET /api/resource/{RESOURCE_URI}/report/latest</code></pre>
 
-                    </div>
+                    <p>
+                        Returns a JSONObject with the latest information concerning the IoT Resource.
+                    </p>
+
+                    <p>Example</p>
+
+                    <pre><code class="language-javascript"><span class="p">{</span><br><span class="s2">  "keyName: "Keyname",</span><br><span class="s2">  latestTime: "2014-05-04T16:57:52.999Z",</span><br><span>  timeZone: "UTC",</span><br><span>  latest: 0,</span><br><span>  minutes5: [</span><br><span>   0,</span><br><span>   0,</span><br><span class="p">   ...</span><br><span class="p">  ],</span><br><span>  minutes60: [</span><br><span>   0,</span><br><span>   0,</span><br><span>    ...</span><br><span class="p">  ],</span><br><span>  day: [</span><br><span>   0,</span><br><span>   0,</span><br><span>    ...</span><br><span>  ],</span><br><span>  daycost: 0,</span><br><span>  month: [</span><br><span>   0,</span><br><span>   0,</span><br><span>    ...</span><br><span>  ],</span><br><span>  monthcost: 0,</span><br><span>  max: {</span><br><span>    day: 0,</span><br><span>    month: 0</span><br><span>    }</span><br><span>  min: {</span><br><span>    day: 0,</span><br><span>    month: 0</span><br><span>    }</span><br><span>  average: {</span><br><span>    day: 0,</span><br><span>    month: 0</span><br><span>  },</span><br><span>  latestString: "Latest",</span><br><span>  minutes5Cost: 0,</span><br><span>  minutes60Cost: 0</span><br><span>}</span></code></pre>
+
                 </div>
+
             </div>
         </div>
 
-        <div class="panel-group">
+        <div class="bs-example">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Clear all properties of a Resource
-                    </h4>
-                </div>
-                <div class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <code>GET /api/resource/clear/**</code>
+                <!-- Default panel contents -->
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Clear all properties of a Resource</p></div>
+                <div class="panel-body">
 
-                        <p class="description">
-                            Returns a <a href="responses.html">response message</a> based on the result of the api call.
-                            If successful all properties are removed from the Resource.
-                        </p>
+                    <pre><code>GET /api/resource/clear/**</code></pre>
 
-                    </div>
+                    <p>
+                        Returns <code>{"status":"OK","code":200}</code> if all properties are suceessfully removed from the Resource, otherwise returns <code>"error"</code>.
+                    </p>
+
                 </div>
+
             </div>
         </div>
 
-        <div class="panel-group">
+
+        <div class="bs-example">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Delete Information Of A Resource
-                    </h4>
-                </div>
-                <div class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <code>DELETE /api/resource/**</code>
+                <!-- Default panel contents -->
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Delete Information Of A Resource</p></div>
+                <div class="panel-body">
 
-                        <p class="description">
-                            Returns a <a href="responses.html">response message</a> based on the result of the api call.
-                            If successful all information related to the resource are permanently deleted from the
-                            system.
-                        </p>
+                    <pre><code>DELETE /api/resource/**</code></pre>
 
-                    </div>
+                    <p>
+                        Returns <code>{"status":"OK","code":200}</code> if all information is permanently deleted from the system, otherwise returns <code>"error"</code>.
+                    </p>
+
                 </div>
+
             </div>
         </div>
 

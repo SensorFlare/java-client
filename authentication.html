@@ -84,6 +84,7 @@ try {
     String userpassword = username + ":" + password;
     String encodedAuthorization = enc.encode(userpassword.getBytes());
     con.setRequestProperty("Authorization", "Basic " +
+    con.setRequestProperty("User-Agent", "sensorflare-java-client");
     encodedAuthorization);
     System.out.println("ResponseCode: " + con.getResponseMessage());
     BufferedReader in =

@@ -21,13 +21,18 @@
     <header class="inner">
         <a id="forkme_banner" href="https://github.com/amaxilat/sensorflare-api">View on GitHub</a>
 
-        <h1 id="project_title"><a href="index.html" style="text-decoration: none; color: #ffffff">Sensorflare API</a></h1>
+        <h1 id="project_title"><a href="index.html" style="text-decoration: none; color: #ffffff">Sensorflare API</a>
+        </h1>
 
         <h2 id="project_tagline"></h2>
 
         <section id="downloads">
-            <a class="zip_download_link" href="download.html">Download the Sensorflare Library as zip file</a>
-            <a class="tar_download_link" href="download.html">Download the Sensorflare Library as tar.gz file</a>
+            <a href="download.html"
+               style="all: none;">
+                Java Client
+            </a>
+            <!--<a class="zip_download_link" href="download.html">Download the Sensorflare Library as zip file</a>-->
+            <!--<a class="tar_download_link" href="download.html">Download the Sensorflare Library as tar.gz file</a>-->
         </section>
     </header>
 </div>
@@ -49,7 +54,8 @@
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">List All The Gateways Of The User</p></div>
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">List All The Gateways Of
+                    The User</p></div>
                 <div class="panel-body">
 
                     <pre><code>GET /api/gateway</code></pre>
@@ -58,7 +64,10 @@
 
                     <p>Example</p>
 
-                    <pre><code class="language-javascript"><span class="p">[</span><br><span class="p"> {</span><br><span class="s2">  id: "1234",</span><br><span class="s2">  name: "gatewayName"</span><br><span class="p"> }</span><span class="p">,</span><br><span class="p"> ...</span><br><span class="p"> ]</span></code></pre>
+                    <pre><code class="language-javascript"><span class="p">[</span><br><span
+                            class="p"> {</span><br><span class="s2">  id: "1234",</span><br><span class="s2">  name: "gatewayName"</span><br><span
+                            class="p"> }</span><span class="p">,</span><br><span class="p"> ...</span><br><span
+                            class="p"> ]</span></code></pre>
                 </div>
 
             </div>
@@ -67,12 +76,14 @@
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Add Property To Gateway</p></div>
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Add Property To
+                    Gateway</p></div>
                 <div class="panel-body">
 
                     <pre><code>GET /api/gateway/{key}/{value}</code></pre>
 
-                    <p>Returns <code>{"status":"OK","code":200}</code> if the Property is added successfully to the Gateway.</p>
+                    <p>Returns <code>{"status":"OK","code":200}</code> if the Property is added successfully to the
+                        Gateway.</p>
 
                 </div>
 
@@ -82,7 +93,8 @@
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">View Information Of A Gateway</p></div>
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">View Information Of A
+                    Gateway</p></div>
                 <div class="panel-body">
 
                     <pre><code>GET /api/gateway/**</code></pre>
@@ -91,7 +103,9 @@
 
                     <p>Example</p>
 
-                    <pre><code class="language-javascript"><span class="p">{</span><br><span class="s2">  id: "1234",</span><br><span class="s2">  gatewayName: "gatewayName",</span><br><span class="p"> }</span></code></pre>
+                    <pre><code class="language-javascript"><span class="p">{</span><br><span
+                            class="s2">  id: "1234",</span><br><span class="s2">  gatewayName: "gatewayName",</span><br><span
+                            class="p"> }</span></code></pre>
                 </div>
 
             </div>
@@ -100,7 +114,8 @@
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">List All The Devices Of The User</p></div>
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">List All The Devices Of
+                    The User</p></div>
                 <div class="panel-body">
 
                     <pre><code>GET /api/device</code></pre>
@@ -109,12 +124,14 @@
 
                     <p>Example</p>
 
-                    <pre><code class="language-javascript"><span class="p">[</span><br><span class="p"> {</span><br><span class="s2">  id: "1234",</span><br><span class="s2">  gatewayName: "gatewayName",</span><br><span class="s2">  uri: "uri"</span><br><span class="p"> }</span><span class="p">,</span><br><span class="p"> ...</span><br><span class="p"> ]</span></code></pre>
+                    <pre><code class="language-javascript"><span class="p">[</span><br><span
+                            class="p"> {</span><br><span class="s2">  id: "1234",</span><br><span class="s2">  gatewayName: "gatewayName",</span><br><span
+                            class="s2">  uri: "uri"</span><br><span class="p"> }</span><span class="p">,</span><br><span
+                            class="p"> ...</span><br><span class="p"> ]</span></code></pre>
                 </div>
 
             </div>
         </div>
-
 
 
     </section>

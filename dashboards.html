@@ -60,51 +60,21 @@
                 <div class="panel-heading"><p class="heading" style="font-variant: small-caps;"> List All Available Dashboard</p></div>
                 <div class="panel-body">
 
-                    <pre><code>GET /api/dashboard</code></pre>
+                    <pre><code>GET /api/dashboards</code></pre>
 
                     <p>Returns a JSONArray with all the Dashboard created by the user.</p>
 
                     <p>Example</p>
 
-                    <pre><code class="language-javascript"><span class="p">[</span><br><span class="s2"> "dashboardName"</span><span class="p">,</span><br><span class="p"> ...</span><br><span class="p">]</span></code></pre>
+                    <pre><code class="language-javascript">{
+  dashboards:[
+    {id:1,name:"Dashboard1 Name"},
+    {id:2,name:"Dashboard2 Name"},
+    ...
+  ]
+}</code></pre>
 
                 </div>
-
-            </div>
-        </div>
-
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Create Dashboard</p></div>
-                <div class="panel-body">
-
-                    <pre><code>GET /api/dashboard/create/{dashboardName}</code></pre>
-
-                    <p>Returns a JSONArray with all the information about the created Dashboard.</p>
-
-                    <p>Example</p>
-
-                    <pre><code class="language-javascript"><span class="p">{</span><br><span class="s2">  id: 12345,</span><br><span class="s2">  name: "dashboardName",</span><br><span class="s2">  longtitude: 0,</span><br><span class="s2">  latitude: 0,</span><br><span class="s2">  tariff: null,</span><br><span class="s2">  featuredResource: null,</span><br><span class="s2">  parentDashboard: null,</span><br><span class="s2">  open: false</span><br><span class="p">}</span></code></pre>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Add Resource To Dashboard</p></div>
-                <div class="panel-body">
-
-                    <pre><code>GET /api/dashboard/{dashbordId}/add/resource/**</code></pre>
-
-                    <p>Returns <code>{"status":"OK","code":200}</code> if the specified IoT Resource is added successfully,
-                        otherwise returns <code>"error"</code>.</p>
-
-                </div>
-
-
 
             </div>
         </div>
@@ -148,15 +118,46 @@
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Create Dashboard</p></div>
+                <div class="panel-body">
+
+                    <pre><code>GET /api/dashboard/create/{dashboardName}</code></pre>
+
+                    <p>Returns a JSONArray with all the information about the created Dashboard.</p>
+
+                    <p>Example</p>
+
+                    <pre><code class="language-javascript"><span class="p">{</span><br><span class="s2">  id: 12345,</span><br><span class="s2">  name: "dashboardName",</span><br><span class="s2">  longtitude: 0,</span><br><span class="s2">  latitude: 0,</span><br><span class="s2">  tariff: null,</span><br><span class="s2">  featuredResource: null,</span><br><span class="s2">  parentDashboard: null,</span><br><span class="s2">  open: false</span><br><span class="p">}</span></code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="bs-example">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
                 <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Delete Dashboard</p></div>
                 <div class="panel-body">
 
                     <pre><code>GET /api/dashboard/delete/{dashboardId}</code></pre>
 
-                    <p>Returns <code>{"status":"OK","code":200}</code> if the specified Dashboard is deleted successfully,
+                    <p>Returns <code>{"status":"Ok","code":200}</code> if the specified Dashboard is deleted successfully,
                         otherwise returns <code>"error"</code>.</p>
                 </div>
 
+            </div>
+        </div>
+
+        <div class="bs-example">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Add Resource To Dashboard</p></div>
+                <div class="panel-body">
+
+                    <pre><code>GET /api/dashboard/{dashbordId}/add/resource/**</code></pre>
+
+                    <p>Returns the JSON description of the Dashboard if the specified IoT Resource was added successfully,
+                        otherwise returns <code>{"status":"Not Found","code":404}</code>  or <code>{"status":"Forbidden","code":403}</code>.</p>
+                </div>
             </div>
         </div>
 
@@ -168,7 +169,7 @@
 
                     <pre><code>GET /api/dashboard/{siteId}/disconnect/**</code></pre>
 
-                    <p>Returns <code>{"status":"OK","code":200}</code> if the specified Resource is disconnected from Dashboard,
+                    <p>Returns <code>{"status":"Ok","code":200}</code> if the specified Resource is disconnected from Dashboard,
                         otherwise returns <code>"error"</code>.</p>
                 </div>
 
@@ -183,7 +184,7 @@
 
                     <pre><code>GET /api/dashboard/{siteId}/featured/**</code></pre>
 
-                    <p>Returns <code>{"status":"OK","code":200}</code> if the specified Resource is featured in Dashboard,
+                    <p>Returns <code>{"status":"Ok","code":200}</code> if the specified Resource is featured in Dashboard,
                         otherwise returns <code>"error"</code>.</p>
                 </div>
 
@@ -209,25 +210,25 @@
 
             </div>
         </div>
+        <!--TODO: replace With Intelligence-->
+        <!--<div class="bs-example">-->
+            <!--<div class="panel panel-default">-->
+                <!--&lt;!&ndash; Default panel contents &ndash;&gt;-->
+                <!--<div class="panel-heading"><p class="heading" style="font-variant: small-caps;">List All Applications of a Dashboard</p></div>-->
+                <!--<div class="panel-body">-->
 
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">List All Applications of a Dashboard</p></div>
-                <div class="panel-body">
+                    <!--<pre><code>GET /api/dashboard/{dashboardName}/application</code></pre>-->
 
-                    <pre><code>GET /api/dashboard/{dashboardName}/application</code></pre>
+                    <!--<p>Returns a JSONArray with all the Applications deployed by the user.</p>-->
 
-                    <p>Returns a JSONArray with all the Applications deployed by the user.</p>
+                    <!--<p>Example</p>-->
 
-                    <p>Example</p>
+                    <!--<pre><code class="language-javascript"><span class="p">[</span><br><span class="s2">  "applicationName",</span><br><span class="s2">  ...</span><br><span class="p"> ]</span></code></pre>-->
 
-                    <pre><code class="language-javascript"><span class="p">[</span><br><span class="s2">  "applicationName",</span><br><span class="s2">  ...</span><br><span class="p"> ]</span></code></pre>
+                <!--</div>-->
 
-                </div>
-
-            </div>
-        </div>
+            <!--</div>-->
+        <!--</div>-->
 
     </section>
 </div>

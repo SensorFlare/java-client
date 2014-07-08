@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sensorflare</groupId>
+    <artifactId>client-example-java</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>SensorFlare Java Client Example</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <packaging>jar</packaging>
+
+    <repositories>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>onejar-maven-plugin.googlecode.com</id>
+            <url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencies>
+        <!-- For StringSummaryFactory, SummaryFactory, StringSummary and Summary -->
+        <dependency>
+            <groupId>com.sensorflare</groupId>
+            <artifactId>sensorflare-client-java</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../sensorflare-client-java/target/sensorflare-client-java-jar-with-dependencies.jar</systemPath>
+        </dependency>
+
+        <!-- For JSONArray, JSONException and JSONObject -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20090211</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.dstovall</groupId>
+                <artifactId>onejar-maven-plugin</artifactId>
+                <version>1.4.4</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <!-- Optional -->
+                            <onejarVersion>0.97</onejarVersion>
+                            <!-- Optional, default is false -->
+                            <attachToBuild>true</attachToBuild>
+                            <!-- Optional, default is "onejar" -->
+                            <classifier>onejar</classifier>
+                            <mainClass>UserClient</mainClass>
+                            <filename>sensorflare-client-example.jar</filename>
+                        </configuration>
+                        <goals>
+                            <goal>one-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+

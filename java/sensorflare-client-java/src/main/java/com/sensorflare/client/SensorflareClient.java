@@ -13,10 +13,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>Java Client for Sensorflare API</p> <p>Created by amaxilatis on 5/4/14.</p>
@@ -331,6 +328,60 @@ public class SensorflareClient {
 
         //Return the details
         return resourceDetails;
+    }
+
+    /**
+     * <p>Returns a Map<String, String> containing the details of a given Intelligence.</p>
+     * <p>The Map<String, String> returned here is compatible with the one returned by getResourceDetails(String). <br />
+     * It contains though more information.</p>
+     *
+     * @param intelligenceId The id of the Intelligence.
+     * @return A Map<String, String> with the details of the Intelligence or null if the logged in User doens't have access to the Intelligence object.
+     *
+     * @throws java.io.IOException if a connection with the server cannot be established.
+     * @throws org.json.JSONException if the server returned an unexpected response.
+     * @throws java.lang.IllegalArgumentException if intelligenceId is null or less than 0.
+     * @throws java.lang.IllegalStateException if the connection has not been authenticated.
+     */
+    public final Map<String, String> getIntelligenceDetails(final Long intelligenceId) throws IOException, JSONException {
+        if (intelligenceId == null || intelligenceId <= 0) {
+            throw new IllegalArgumentException("intelligenceId cannot be null");
+        }
+
+        final String intelligenceUrl = String.format("intelligence/%d", intelligenceId); //Construct the url
+        final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForGetRequest(intelligenceUrl); //Do the API call
+        final JSONObject response = new JSONObject(getApiCallResponse(connection)); //Parse the API call response
+        final JSONObject intelligenceJSONObject; //The Intelligence info as a JSONObject
+        final Map<String, String> intelligenceDetails; //The Map<String, String> with the intelligence details.
+
+        if (response.getInt("code") != 200) {
+            //Intelligence not found or doesn't belong to the logged in User
+            intelligenceDetails = null;
+
+        } else {
+            //Intelligence found. Populate the HashMap<> and return the details.
+            intelligenceJSONObject = response.getJSONObject("intelligence");
+            intelligenceDetails = new HashMap<>();
+            intelligenceDetails.put("id", String.valueOf(intelligenceJSONObject.getLong("id")));
+            intelligenceDetails.put("uri", String.format("sensorflare-application-%d/execution/bypass", intelligenceJSONObject.getLong("id")));
+            intelligenceDetails.put("name", intelligenceJSONObject.getString("name"));
+
+            //Set the type if we have one
+            if (intelligenceJSONObject.has("type") && !intelligenceJSONObject.isNull("type")) {
+                //We have a type that is not null
+                intelligenceDetails.put("type", intelligenceJSONObject.getJSONObject("type").getString("name"));
+
+            } else {
+                //Type not found
+                intelligenceDetails.put("type", "Unknown");
+            }
+
+            intelligenceDetails.put("isa", "Intelligence");
+            intelligenceDetails.put("observes", "");
+            intelligenceDetails.put("controls", "");
+        }
+
+        return intelligenceDetails;
     }
 
     /**

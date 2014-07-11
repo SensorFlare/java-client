@@ -648,6 +648,41 @@ public class SensorflareClient {
     }
 
     /**
+     * <p>Set the value of an Intelligence.</p>
+     *
+     * @param intelligenceId The id of the Intelligence.
+     * @param resourceValue The new value for the Intelligence.
+     * @return true on success, false on error
+     *
+     * @throws java.io.IOException if a connection cannot be established with the server
+     * @throws org.json.JSONException if the server sent an unexpected response
+     * @throws java.lang.IllegalStateException if the connection has not been authenticated.
+     */
+    public final boolean setIntelligenceValue(final Long intelligenceId, final double resourceValue) throws IOException, JSONException {
+        final String url = String.format("intelligence/%d/bypass", intelligenceId); //The url where to post the new value
+        final Map<String, String> parameters = new HashMap<>(); //The parameters of the post request
+        final JSONObject response; //The response of the API
+        final boolean result; //The result of the request
+
+        //Populate the parameters
+        parameters.put("status", String.valueOf(resourceValue));
+
+        //Get the response
+        response = new JSONObject(postPage(url, parameters));
+
+        if (response.has("status") && response.getString("status").equalsIgnoreCase("ok")) {
+            //Intelligence value successfully set
+            result = true;
+
+        } else {
+            //Error setting the Intelligence value
+            result = false;
+        }
+
+        return result;
+    }
+
+    /**
      * Shows all the Devices.
      *
      * @return a String List with all the Devices.

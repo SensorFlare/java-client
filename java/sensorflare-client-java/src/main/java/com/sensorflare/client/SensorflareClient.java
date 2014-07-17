@@ -5,11 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -572,8 +568,7 @@ public class SensorflareClient {
      * @throws JSONException in case of exception during JSON processing.
      */
     public final String resourceDescription(final String resourceUri) throws IOException, JSONException {
-        String description = new String(getPage("resource/" + resourceUri + "/description"));
-        return description;
+        return getPage("resource/" + resourceUri + "/description");
     }
 
     /**
@@ -898,11 +893,12 @@ public class SensorflareClient {
     }
 
     /**
-     * <p>Private method that returns an HttpURLConnection with the Authorization header set, for a GET request,<br />
+     * <p>Protected method that returns an HttpURLConnection with the Authorization header set, for a GET request,<br />
      * for the apiEndpoint.</p>
      *
      * @param apiEndpoint The API endEndpoint to access via GET
      * @return An HttpUrlConnection object
+     *
      * @throws java.net.MalformedURLException     if apiEndpoint does not result in a valid URL
      * @throws java.io.IOException                if the connection to the resulting URL cannot be established
      * @throws java.lang.IllegalStateException    if no authentication has been made prior to the use of this method
@@ -916,11 +912,12 @@ public class SensorflareClient {
     }
 
     /**
-     * <p>Private method that returns an HttpURLConnection with the Authorization header set, for a POST request,<br />
+     * <p>Protected method that returns an HttpURLConnection with the Authorization header set, for a POST request,<br />
      * for the apiEndpoint.</p>
      *
      * @param apiEndpoint The API endEndpoint to access via GET
      * @return An HttpUrlConnection object
+     *
      * @throws java.net.MalformedURLException     if apiEndpoint does not result in a valid URL
      * @throws java.io.IOException                if the connection to the resulting URL cannot be established
      * @throws java.lang.IllegalStateException    if no authentication has been made prior to the use of this method
@@ -934,6 +931,25 @@ public class SensorflareClient {
     }
 
     /**
+     * <p>Protected method that returns an HttpURLConnection with the Authorization header set, for a PUT request,<br />
+     * for the apiEndpoint.</p>
+     *
+     * @param apiEndpoint The API endEndpoint to access via GET
+     * @return An HttpUrlConnection object
+     *
+     * @throws java.net.MalformedURLException     if apiEndpoint does not result in a valid URL
+     * @throws java.io.IOException                if the connection to the resulting URL cannot be established
+     * @throws java.lang.IllegalStateException    if no authentication has been made prior to the use of this method
+     * @throws java.lang.IllegalArgumentException if apiEndpoint is null or empty
+     */
+    protected final HttpURLConnection getAuthorizedHttpUrlConnectionForPutRequest(final String apiEndpoint) throws IOException {
+        //Get the authorized HttpURLConnection
+        final HttpURLConnection connection = getAuthorizedHttpURLConnectionFor(apiEndpoint);
+        connection.setRequestMethod("PUT");
+        return connection;
+    }
+
+    /**
      * <p>Returns the response of an API call via an HttpURLConnection.</p>
      *
      * @param connection The HttpURLConnection to the API Endpoint.
@@ -941,7 +957,8 @@ public class SensorflareClient {
      * @throws java.io.IOException if the response cannot be read.
      */
     protected final String getApiCallResponse(HttpURLConnection connection) throws IOException {
-        final BufferedReader inputReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        final InputStream connectionInputStream = (connection.getResponseCode() < 400) ? connection.getInputStream() : connection.getErrorStream();
+        final BufferedReader inputReader = new BufferedReader(new InputStreamReader(connectionInputStream));
         final StringBuilder responseBuilder = new StringBuilder();
 
         String line;
@@ -988,13 +1005,45 @@ public class SensorflareClient {
      * <p>Do a POST request for the given API path and return the response as a String.</p>
      *
      * @param path  The API path to do the GET request
-     * @param param A map that contains the values to post
+     * @param params A map that contains the values to post
      * @return The API call response as a String
      * @throws java.io.IOException             if a connection cannot be established
      * @throws java.lang.IllegalStateException if the connection cannot be authorized
      */
     protected final String postPage(final String path, final Map<String, String> params) throws IOException {
         final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForPostRequest(path); //Create connection
+
+        //Do the POST request and return the response
+        return doPostOrPut(connection, params);
+    }
+
+    /**
+     * <p>Do a PUT request for the given API path and return the response as a String.</p>
+     *
+     * @param path  The API path to do the GET request
+     * @param params A map that contains the values to put
+     * @return The API call response as a String
+     * @throws java.io.IOException             if a connection cannot be established
+     * @throws java.lang.IllegalStateException if the connection cannot be authorized
+     */
+    protected final String putPage(final String path, final Map<String, String> params) throws IOException {
+        final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForPutRequest(path); //Create the connection
+
+        //Do the PUT request and return the response
+        return doPostOrPut(connection, params);
+    }
+
+    /**
+     * <p>Do a POST or PUT request given the initialized HttpURLConnection and the Map<String, String> parameters map.</p>
+     *
+     * @param connection The HttpURLConnection to the API Endpoint.
+     * @param params A map that contains the parameters to send.
+     * @return A String with the API call response.
+     *
+     * @throws java.io.IOException if a connection cannot be established
+     * @throws java.lang.IllegalStateException if the connection cannot be authorized
+     */
+    private String doPostOrPut(final HttpURLConnection connection, final Map<String, String> params) throws IOException {
         final StringBuilder postParams = new StringBuilder(); //Parameters string builder
         final BufferedWriter postParamsWriter; //Buffered writer connected to the output stream of the connection, where we write the parameters
 

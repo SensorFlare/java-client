@@ -134,16 +134,17 @@ public class SensorflareClient {
     }
 
     /**
-     * <p>Returns a Map<Long, String> of the authenticated User's Dashboards.</p>
+     * <p>Returns a List<Long> of the authenticated User's Dashboard ids.</p>
      *
-     * @return A Map<Long, String> containing the User's Dashboards.
-     * @throws java.io.IOException             if the connection cannot be established.
-     * @throws org.json.JSONException          in case the server's response cannot be parsed.
+     * @return A List<Long> containing the User's Dashboards.
+     *
+     * @throws java.io.IOException if the connection cannot be established.
+     * @throws org.json.JSONException  in case the server's response cannot be parsed.
      * @throws java.lang.IllegalStateException if the connection has not been authenticated.
      */
-    public final Map<Long, String> getDashboards() throws IOException, JSONException {
+    public final List<Long> getDashboards() throws IOException, JSONException {
         //The map of the dashboards
-        final Map<Long, String> dashboards = new HashMap<>();
+        final List<Long> dashboards = new ArrayList<>();
 
         //Do the api call and parse the response into a JSONObject
         final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForGetRequest("dashboards");
@@ -154,12 +155,45 @@ public class SensorflareClient {
 
         //Iterate through the JSONObjects in the JSONArray and parse them as a Map.Entry<Long, String>
         for (int i = 0; i < dashboardsJsonArray.length(); i++) {
-            final JSONObject dashboardJsonObject = dashboardsJsonArray.getJSONObject(i);
-
-            dashboards.put(dashboardJsonObject.getLong("id"), dashboardJsonObject.getString("name"));
+            dashboards.add(dashboardsJsonArray.getLong(i));
         }
 
         return dashboards;
+    }
+
+    /**
+     * <p>Returns a Map<String, String> with the details of the requested dashboard.</p>
+     * <p>The Map will contains the following keys and values: <br />
+     * <ul>
+     *     <li>id</li>
+     *     <li>name</li>
+     *     <li>latitude</li>
+     *     <li>longitude</li>
+     * </ul>
+     * </p>
+     *
+     * @param dashboardId The id of the dashboard.
+     * @return A Map<String,String> with the details of the Dashboard.
+     *
+     * @throws java.io.IOException if the connection cannot be established.
+     * @throws org.json.JSONException  in case the server's response cannot be parsed.
+     * @throws java.lang.IllegalStateException if the connection has not been authenticated.
+     */
+    public final Map<String, String> getDashboardDetails(final Long dashboardId) throws IOException, JSONException {
+        if (dashboardId == null || dashboardId <= 0) {
+            throw new IllegalArgumentException("dashboardId cannot be null or less than 0");
+        }
+
+        final Map<String, String> dashboardDetails = new HashMap<>(); //The Map<> to return
+        final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForGetRequest(String.format("dashboard/%d", dashboardId)); //Do the API call
+        final JSONObject dashbaordDetailsJSONObject = new JSONObject(getApiCallResponse(connection)); //Parse the API call response
+
+        dashboardDetails.put("id", String.valueOf(dashbaordDetailsJSONObject.getLong("id"))); //Get the id
+        dashboardDetails.put("name", dashbaordDetailsJSONObject.getString("name")); //Get the name
+        dashboardDetails.put("latitude", String.valueOf(dashbaordDetailsJSONObject.getDouble("latitude"))); //Get the latitude
+        dashboardDetails.put("longitude", String.valueOf(dashbaordDetailsJSONObject.getDouble("longtitude"))); //Get the latitude
+
+        return dashboardDetails;
     }
 
     /**

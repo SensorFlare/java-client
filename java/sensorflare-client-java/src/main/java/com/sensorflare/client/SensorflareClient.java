@@ -950,6 +950,25 @@ public class SensorflareClient {
     }
 
     /**
+     * <p>Protected method that returns an HttpURLConnection with the Authorization header set, for a DELETE request,<br />
+     * for the apiEndpoint.</p>
+     *
+     * @param apiEndpoint The API endEndpoint to access via GET
+     * @return An HttpUrlConnection object
+     *
+     * @throws java.net.MalformedURLException     if apiEndpoint does not result in a valid URL
+     * @throws java.io.IOException                if the connection to the resulting URL cannot be established
+     * @throws java.lang.IllegalStateException    if no authentication has been made prior to the use of this method
+     * @throws java.lang.IllegalArgumentException if apiEndpoint is null or empty
+     */
+    protected final HttpURLConnection getAuthorizedHttpUrlConnectionForDeleteRequest(final String apiEndpoint) throws IOException {
+        //Get the authorized HttpURLConnection
+        final HttpURLConnection connection = getAuthorizedHttpURLConnectionFor(apiEndpoint);
+        connection.setRequestMethod("DELETE");
+        return connection;
+    }
+
+    /**
      * <p>Returns the response of an API call via an HttpURLConnection.</p>
      *
      * @param connection The HttpURLConnection to the API Endpoint.
@@ -1020,10 +1039,10 @@ public class SensorflareClient {
     /**
      * <p>Do a PUT request for the given API path and return the response as a String.</p>
      *
-     * @param path  The API path to do the GET request
+     * @param path  The API path to do the PUT request
      * @param params A map that contains the values to put
      * @return The API call response as a String
-     * @throws java.io.IOException             if a connection cannot be established
+     * @throws java.io.IOException if a connection cannot be established
      * @throws java.lang.IllegalStateException if the connection cannot be authorized
      */
     protected final String putPage(final String path, final Map<String, String> params) throws IOException {
@@ -1031,6 +1050,21 @@ public class SensorflareClient {
 
         //Do the PUT request and return the response
         return doPostOrPut(connection, params);
+    }
+
+    /**
+     * <p>Do a DELETE request for the given API path and return the response as a String.</p>
+     *
+     * @param path  The API path to do the DELETE request
+     * @return The API call response as a String
+     * @throws java.io.IOException if a connection cannot be established
+     * @throws java.lang.IllegalStateException if the connection cannot be authorized
+     */
+    protected final String deletePage(final String path) throws IOException {
+        final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForDeleteRequest(path); //Create the connection
+
+        //Do the PUT request and return the response
+        return getApiCallResponse(connection);
     }
 
     /**

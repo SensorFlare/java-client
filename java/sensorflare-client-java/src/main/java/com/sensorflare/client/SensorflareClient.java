@@ -230,8 +230,9 @@ public class SensorflareClient {
      * <p>Returns a List<Long> of Intelligence ids for a given Dashboard.</p>
      *
      * @param dashboardId The id of the dashboard.
-     * @return null if the requested Dashboard doesn't exist or the logged in User doesn't have access to it or a List<Long> with
-     *      Intelligence ids for the given Dashboard. The returned List<Long> may be empty if the Dashboard doesn't have any Intelligence.
+     * @return a List<Long> with Intelligence ids for the given Dashboard.
+     *      The returned List<Long> may be empty if the Dashboard doesn't have any Intelligence or the Dashboard doesn't
+     *      belong or is shared with the authenticated User.
      *
      * @throws java.io.IOException if a connection cannot be established with the server.
      * @throws org.json.JSONException if the server returned an unexpected response.
@@ -247,23 +248,16 @@ public class SensorflareClient {
         final String dashboardIntelligenceUrl = String.format("dashboards/%d/intelligence", dashboardId); //Construct the URL
         final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForGetRequest(dashboardIntelligenceUrl); //Authorized connection for the url
         final JSONObject response = new JSONObject(getApiCallResponse(connection)); //The API call response JSONObject
-        final int responseStatusCode = response.getInt("code");
         final JSONArray intelligenceIdsJSONArray; //JSONArray that contains the Intelligence ids
-        final List<Long> intelligenceIds; //The List<Long> of the Intelligence ids for the given Dashboard
+        final List<Long> intelligenceIds = new ArrayList<>(); //The List<Long> of the Intelligence ids for the given Dashboard
 
-        //Check the status of the response first
-        //We don't need to check for status code 401 as the client will throw an IllegalStateException when calling
-        //getAuthorizedHttpUrlConnectionForGetRequest(String)
-        if (responseStatusCode == 403 || responseStatusCode == 404) {
-            //Dashboard not found or Dashboard doesn't belong to the logged in User or Dashboard isn't shared with the logged in User
-            intelligenceIds = null;
 
-        } else {
+        //Populate the intelligenceIds only if responseStatusCode is 200
+        if (response.getInt("code") == 200) {
             //Status code is 200.
 
             //Get the intelligenceIdsJSONArray iterate through it and populate the intelligenceIds List<Long>
             intelligenceIdsJSONArray = response.getJSONArray("intelligence");
-            intelligenceIds = new ArrayList<>();
 
             for (int i = 0; i < intelligenceIdsJSONArray.length(); i++) {
                 intelligenceIds.add(intelligenceIdsJSONArray.getLong(i));

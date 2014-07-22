@@ -5,18 +5,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>Java Client for Sensorflare API</p> <p>Created by amaxilatis on 5/4/14.</p>
@@ -141,16 +134,17 @@ public class SensorflareClient {
     }
 
     /**
-     * <p>Returns a Map<Long, String> of the authenticated User's Dashboards.</p>
+     * <p>Returns a List<Long> of the authenticated User's Dashboard ids.</p>
      *
-     * @return A Map<Long, String> containing the User's Dashboards.
-     * @throws java.io.IOException             if the connection cannot be established.
-     * @throws org.json.JSONException          in case the server's response cannot be parsed.
+     * @return A List<Long> containing the User's Dashboards.
+     *
+     * @throws java.io.IOException if the connection cannot be established.
+     * @throws org.json.JSONException  in case the server's response cannot be parsed.
      * @throws java.lang.IllegalStateException if the connection has not been authenticated.
      */
-    public final Map<Long, String> getDashboards() throws IOException, JSONException {
+    public final List<Long> getDashboards() throws IOException, JSONException {
         //The map of the dashboards
-        final Map<Long, String> dashboards = new HashMap<>();
+        final List<Long> dashboards = new ArrayList<>();
 
         //Do the api call and parse the response into a JSONObject
         final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForGetRequest("dashboards");
@@ -161,12 +155,45 @@ public class SensorflareClient {
 
         //Iterate through the JSONObjects in the JSONArray and parse them as a Map.Entry<Long, String>
         for (int i = 0; i < dashboardsJsonArray.length(); i++) {
-            final JSONObject dashboardJsonObject = dashboardsJsonArray.getJSONObject(i);
-
-            dashboards.put(dashboardJsonObject.getLong("id"), dashboardJsonObject.getString("name"));
+            dashboards.add(dashboardsJsonArray.getLong(i));
         }
 
         return dashboards;
+    }
+
+    /**
+     * <p>Returns a Map<String, String> with the details of the requested dashboard.</p>
+     * <p>The Map will contains the following keys and values: <br />
+     * <ul>
+     *     <li>id</li>
+     *     <li>name</li>
+     *     <li>latitude</li>
+     *     <li>longitude</li>
+     * </ul>
+     * </p>
+     *
+     * @param dashboardId The id of the dashboard.
+     * @return A Map<String,String> with the details of the Dashboard.
+     *
+     * @throws java.io.IOException if the connection cannot be established.
+     * @throws org.json.JSONException  in case the server's response cannot be parsed.
+     * @throws java.lang.IllegalStateException if the connection has not been authenticated.
+     */
+    public final Map<String, String> getDashboardDetails(final Long dashboardId) throws IOException, JSONException {
+        if (dashboardId == null || dashboardId <= 0) {
+            throw new IllegalArgumentException("dashboardId cannot be null or less than 0");
+        }
+
+        final Map<String, String> dashboardDetails = new HashMap<>(); //The Map<> to return
+        final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForGetRequest(String.format("dashboard/%d", dashboardId)); //Do the API call
+        final JSONObject dashbaordDetailsJSONObject = new JSONObject(getApiCallResponse(connection)); //Parse the API call response
+
+        dashboardDetails.put("id", String.valueOf(dashbaordDetailsJSONObject.getLong("id"))); //Get the id
+        dashboardDetails.put("name", dashbaordDetailsJSONObject.getString("name")); //Get the name
+        dashboardDetails.put("latitude", String.valueOf(dashbaordDetailsJSONObject.getDouble("latitude"))); //Get the latitude
+        dashboardDetails.put("longitude", String.valueOf(dashbaordDetailsJSONObject.getDouble("longtitude"))); //Get the latitude
+
+        return dashboardDetails;
     }
 
     /**
@@ -197,6 +224,48 @@ public class SensorflareClient {
         }
 
         return dashboardResources;
+    }
+
+    /**
+     * <p>Returns a List<Long> of Intelligence ids for a given Dashboard.</p>
+     *
+     * @param dashboardId The id of the dashboard.
+     * @return a List<Long> with Intelligence ids for the given Dashboard.
+     *      The returned List<Long> may be empty if the Dashboard doesn't have any Intelligence or the Dashboard doesn't
+     *      belong or is shared with the authenticated User.
+     *
+     * @throws java.io.IOException if a connection cannot be established with the server.
+     * @throws org.json.JSONException if the server returned an unexpected response.
+     * @throws java.lang.IllegalArgumentException if dashboardId is null or less than 0.
+     * @throws java.lang.IllegalStateException if the connection has not been authenticated.
+     */
+    public final List<Long> getDashboardIntelligence(final Long dashboardId) throws IOException, JSONException {
+        //Check if dashboardId is valid
+        if (dashboardId == null || dashboardId <= 0) {
+            throw new IllegalArgumentException("dashboardId cannot be null or less than 0.");
+        }
+
+        final String dashboardIntelligenceUrl = String.format("dashboards/%d/intelligence", dashboardId); //Construct the URL
+        final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForGetRequest(dashboardIntelligenceUrl); //Authorized connection for the url
+        final JSONObject response = new JSONObject(getApiCallResponse(connection)); //The API call response JSONObject
+        final JSONArray intelligenceIdsJSONArray; //JSONArray that contains the Intelligence ids
+        final List<Long> intelligenceIds = new ArrayList<>(); //The List<Long> of the Intelligence ids for the given Dashboard
+
+
+        //Populate the intelligenceIds only if responseStatusCode is 200
+        if (response.getInt("code") == 200) {
+            //Status code is 200.
+
+            //Get the intelligenceIdsJSONArray iterate through it and populate the intelligenceIds List<Long>
+            intelligenceIdsJSONArray = response.getJSONArray("intelligence");
+
+            for (int i = 0; i < intelligenceIdsJSONArray.length(); i++) {
+                intelligenceIds.add(intelligenceIdsJSONArray.getLong(i));
+            }
+        }
+
+        //Return the null or List<Long>
+        return intelligenceIds;
     }
 
     /**
@@ -283,6 +352,60 @@ public class SensorflareClient {
 
         //Return the details
         return resourceDetails;
+    }
+
+    /**
+     * <p>Returns a Map<String, String> containing the details of a given Intelligence.</p>
+     * <p>The Map<String, String> returned here is compatible with the one returned by getResourceDetails(String). <br />
+     * It contains though more information.</p>
+     *
+     * @param intelligenceId The id of the Intelligence.
+     * @return A Map<String, String> with the details of the Intelligence or null if the logged in User doens't have access to the Intelligence object.
+     *
+     * @throws java.io.IOException if a connection with the server cannot be established.
+     * @throws org.json.JSONException if the server returned an unexpected response.
+     * @throws java.lang.IllegalArgumentException if intelligenceId is null or less than 0.
+     * @throws java.lang.IllegalStateException if the connection has not been authenticated.
+     */
+    public final Map<String, String> getIntelligenceDetails(final Long intelligenceId) throws IOException, JSONException {
+        if (intelligenceId == null || intelligenceId <= 0) {
+            throw new IllegalArgumentException("intelligenceId cannot be null");
+        }
+
+        final String intelligenceUrl = String.format("intelligence/%d", intelligenceId); //Construct the url
+        final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForGetRequest(intelligenceUrl); //Do the API call
+        final JSONObject response = new JSONObject(getApiCallResponse(connection)); //Parse the API call response
+        final JSONObject intelligenceJSONObject; //The Intelligence info as a JSONObject
+        final Map<String, String> intelligenceDetails; //The Map<String, String> with the intelligence details.
+
+        if (response.getInt("code") != 200) {
+            //Intelligence not found or doesn't belong to the logged in User
+            intelligenceDetails = null;
+
+        } else {
+            //Intelligence found. Populate the HashMap<> and return the details.
+            intelligenceJSONObject = response.getJSONObject("intelligence");
+            intelligenceDetails = new HashMap<>();
+            intelligenceDetails.put("id", String.valueOf(intelligenceJSONObject.getLong("id")));
+            intelligenceDetails.put("uri", String.format("sensorflare-application-%d/execution/bypass", intelligenceJSONObject.getLong("id")));
+            intelligenceDetails.put("name", intelligenceJSONObject.getString("name"));
+
+            //Set the type if we have one
+            if (intelligenceJSONObject.has("type") && !intelligenceJSONObject.isNull("type")) {
+                //We have a type that is not null
+                intelligenceDetails.put("type", intelligenceJSONObject.getJSONObject("type").getString("name"));
+
+            } else {
+                //Type not found
+                intelligenceDetails.put("type", "Unknown");
+            }
+
+            intelligenceDetails.put("isa", "Intelligence");
+            intelligenceDetails.put("observes", "");
+            intelligenceDetails.put("controls", "");
+        }
+
+        return intelligenceDetails;
     }
 
     /**
@@ -473,8 +596,7 @@ public class SensorflareClient {
      * @throws JSONException in case of exception during JSON processing.
      */
     public final String resourceDescription(final String resourceUri) throws IOException, JSONException {
-        String description = new String(getPage("resource/" + resourceUri + "/description"));
-        return description;
+        return getPage("resource/" + resourceUri + "/description");
     }
 
     /**
@@ -542,6 +664,41 @@ public class SensorflareClient {
             result = true;
 
         } else {
+            result = false;
+        }
+
+        return result;
+    }
+
+    /**
+     * <p>Set the value of an Intelligence.</p>
+     *
+     * @param intelligenceId The id of the Intelligence.
+     * @param resourceValue The new value for the Intelligence.
+     * @return true on success, false on error
+     *
+     * @throws java.io.IOException if a connection cannot be established with the server
+     * @throws org.json.JSONException if the server sent an unexpected response
+     * @throws java.lang.IllegalStateException if the connection has not been authenticated.
+     */
+    public final boolean setIntelligenceValue(final Long intelligenceId, final double resourceValue) throws IOException, JSONException {
+        final String url = String.format("intelligence/%d/bypass", intelligenceId); //The url where to post the new value
+        final Map<String, String> parameters = new HashMap<>(); //The parameters of the post request
+        final JSONObject response; //The response of the API
+        final boolean result; //The result of the request
+
+        //Populate the parameters
+        parameters.put("status", String.valueOf(resourceValue));
+
+        //Get the response
+        response = new JSONObject(postPage(url, parameters));
+
+        if (response.has("status") && response.getString("status").equalsIgnoreCase("ok")) {
+            //Intelligence value successfully set
+            result = true;
+
+        } else {
+            //Error setting the Intelligence value
             result = false;
         }
 
@@ -764,11 +921,12 @@ public class SensorflareClient {
     }
 
     /**
-     * <p>Private method that returns an HttpURLConnection with the Authorization header set, for a GET request,<br />
+     * <p>Protected method that returns an HttpURLConnection with the Authorization header set, for a GET request,<br />
      * for the apiEndpoint.</p>
      *
      * @param apiEndpoint The API endEndpoint to access via GET
      * @return An HttpUrlConnection object
+     *
      * @throws java.net.MalformedURLException     if apiEndpoint does not result in a valid URL
      * @throws java.io.IOException                if the connection to the resulting URL cannot be established
      * @throws java.lang.IllegalStateException    if no authentication has been made prior to the use of this method
@@ -782,11 +940,12 @@ public class SensorflareClient {
     }
 
     /**
-     * <p>Private method that returns an HttpURLConnection with the Authorization header set, for a POST request,<br />
+     * <p>Protected method that returns an HttpURLConnection with the Authorization header set, for a POST request,<br />
      * for the apiEndpoint.</p>
      *
      * @param apiEndpoint The API endEndpoint to access via GET
      * @return An HttpUrlConnection object
+     *
      * @throws java.net.MalformedURLException     if apiEndpoint does not result in a valid URL
      * @throws java.io.IOException                if the connection to the resulting URL cannot be established
      * @throws java.lang.IllegalStateException    if no authentication has been made prior to the use of this method
@@ -800,6 +959,44 @@ public class SensorflareClient {
     }
 
     /**
+     * <p>Protected method that returns an HttpURLConnection with the Authorization header set, for a PUT request,<br />
+     * for the apiEndpoint.</p>
+     *
+     * @param apiEndpoint The API endEndpoint to access via GET
+     * @return An HttpUrlConnection object
+     *
+     * @throws java.net.MalformedURLException     if apiEndpoint does not result in a valid URL
+     * @throws java.io.IOException                if the connection to the resulting URL cannot be established
+     * @throws java.lang.IllegalStateException    if no authentication has been made prior to the use of this method
+     * @throws java.lang.IllegalArgumentException if apiEndpoint is null or empty
+     */
+    protected final HttpURLConnection getAuthorizedHttpUrlConnectionForPutRequest(final String apiEndpoint) throws IOException {
+        //Get the authorized HttpURLConnection
+        final HttpURLConnection connection = getAuthorizedHttpURLConnectionFor(apiEndpoint);
+        connection.setRequestMethod("PUT");
+        return connection;
+    }
+
+    /**
+     * <p>Protected method that returns an HttpURLConnection with the Authorization header set, for a DELETE request,<br />
+     * for the apiEndpoint.</p>
+     *
+     * @param apiEndpoint The API endEndpoint to access via GET
+     * @return An HttpUrlConnection object
+     *
+     * @throws java.net.MalformedURLException     if apiEndpoint does not result in a valid URL
+     * @throws java.io.IOException                if the connection to the resulting URL cannot be established
+     * @throws java.lang.IllegalStateException    if no authentication has been made prior to the use of this method
+     * @throws java.lang.IllegalArgumentException if apiEndpoint is null or empty
+     */
+    protected final HttpURLConnection getAuthorizedHttpUrlConnectionForDeleteRequest(final String apiEndpoint) throws IOException {
+        //Get the authorized HttpURLConnection
+        final HttpURLConnection connection = getAuthorizedHttpURLConnectionFor(apiEndpoint);
+        connection.setRequestMethod("DELETE");
+        return connection;
+    }
+
+    /**
      * <p>Returns the response of an API call via an HttpURLConnection.</p>
      *
      * @param connection The HttpURLConnection to the API Endpoint.
@@ -807,7 +1004,8 @@ public class SensorflareClient {
      * @throws java.io.IOException if the response cannot be read.
      */
     protected final String getApiCallResponse(HttpURLConnection connection) throws IOException {
-        final BufferedReader inputReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        final InputStream connectionInputStream = (connection.getResponseCode() < 400) ? connection.getInputStream() : connection.getErrorStream();
+        final BufferedReader inputReader = new BufferedReader(new InputStreamReader(connectionInputStream));
         final StringBuilder responseBuilder = new StringBuilder();
 
         String line;
@@ -854,13 +1052,60 @@ public class SensorflareClient {
      * <p>Do a POST request for the given API path and return the response as a String.</p>
      *
      * @param path  The API path to do the GET request
-     * @param param A map that contains the values to post
+     * @param params A map that contains the values to post
      * @return The API call response as a String
      * @throws java.io.IOException             if a connection cannot be established
      * @throws java.lang.IllegalStateException if the connection cannot be authorized
      */
     protected final String postPage(final String path, final Map<String, String> params) throws IOException {
         final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForPostRequest(path); //Create connection
+
+        //Do the POST request and return the response
+        return doPostOrPut(connection, params);
+    }
+
+    /**
+     * <p>Do a PUT request for the given API path and return the response as a String.</p>
+     *
+     * @param path  The API path to do the PUT request
+     * @param params A map that contains the values to put
+     * @return The API call response as a String
+     * @throws java.io.IOException if a connection cannot be established
+     * @throws java.lang.IllegalStateException if the connection cannot be authorized
+     */
+    protected final String putPage(final String path, final Map<String, String> params) throws IOException {
+        final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForPutRequest(path); //Create the connection
+
+        //Do the PUT request and return the response
+        return doPostOrPut(connection, params);
+    }
+
+    /**
+     * <p>Do a DELETE request for the given API path and return the response as a String.</p>
+     *
+     * @param path  The API path to do the DELETE request
+     * @return The API call response as a String
+     * @throws java.io.IOException if a connection cannot be established
+     * @throws java.lang.IllegalStateException if the connection cannot be authorized
+     */
+    protected final String deletePage(final String path) throws IOException {
+        final HttpURLConnection connection = getAuthorizedHttpUrlConnectionForDeleteRequest(path); //Create the connection
+
+        //Do the PUT request and return the response
+        return getApiCallResponse(connection);
+    }
+
+    /**
+     * <p>Do a POST or PUT request given the initialized HttpURLConnection and the Map<String, String> parameters map.</p>
+     *
+     * @param connection The HttpURLConnection to the API Endpoint.
+     * @param params A map that contains the parameters to send.
+     * @return A String with the API call response.
+     *
+     * @throws java.io.IOException if a connection cannot be established
+     * @throws java.lang.IllegalStateException if the connection cannot be authorized
+     */
+    private String doPostOrPut(final HttpURLConnection connection, final Map<String, String> params) throws IOException {
         final StringBuilder postParams = new StringBuilder(); //Parameters string builder
         final BufferedWriter postParamsWriter; //Buffered writer connected to the output stream of the connection, where we write the parameters
 

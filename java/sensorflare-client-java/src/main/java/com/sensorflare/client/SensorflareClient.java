@@ -111,6 +111,19 @@ public class SensorflareClient {
     }
 
     /**
+     * <p>Check if the client is authenticated for the given username and password</p>
+     *
+     * @param username username as String.
+     * @param password password as String.
+     * @return true if the client is authenticated for the given username and password, false otherwise.
+     */
+    public final boolean isClientFor(final String username, final String password) {
+        final String authToken = new String(Base64.encodeBase64((username + ":" + password).getBytes()));
+
+        return authToken.equals(authorizationToken);
+    }
+
+    /**
      * <p>Checks if the client is authenticated.</p>
      *
      * @return Return true for yes, false for no.

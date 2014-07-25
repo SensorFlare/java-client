@@ -285,9 +285,9 @@ public class SensorflareClient {
      * <p>Returns a Map<String, String> with the details of a given resource</p>
      *
      * @param resourceUri The resource URI
-     * @return The Map<String, String> with the resource details or null if the resource details are not valid.
-     * @throws java.io.IOException             if the connection cannot be established.
-     * @throws org.json.JSONException          in case the server's response cannot be parsed.
+     * @return The Map<String, String> with the resource details.
+     * @throws java.io.IOException if the connection cannot be established.
+     * @throws org.json.JSONException in case the server's response cannot be parsed.
      * @throws java.lang.IllegalStateException if the connection has not been authenticated.
      */
     public final Map<String, String> getResourceDetails(final String resourceUri) throws IOException, JSONException {
@@ -314,8 +314,8 @@ public class SensorflareClient {
             resourceDetails.put("isa", resourceDetailsJSONObject.getString("isa"));
 
         } else {
-            //Return null if the resource doesn't have a valid type.
-            return null;
+            //Throw a JSONException if the resources doesn't have an isa field
+            throw new JSONException("resource doesn't have an isa field");
         }
 
         //Get what the resource observer if it's a sensor

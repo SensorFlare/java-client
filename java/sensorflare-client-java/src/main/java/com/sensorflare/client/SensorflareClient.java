@@ -334,6 +334,14 @@ public class SensorflareClient {
             resourceDetails.put("controls", "");
         }
 
+        //Get the unit of measurement for the resource
+        if (resourceDetailsJSONObject.has("uom")) {
+            resourceDetails.put("uom", resourceDetailsJSONObject.getString("uom"));
+
+        } else {
+            resourceDetails.put("uom", "");
+        }
+
         //Set a name based on the resource type or uri if the resource doesn't have a name
         if (!hasName) {
             if (resourceDetails.get("isa").equalsIgnoreCase("sensor") && resourceDetailsJSONObject.has("observes")) {
@@ -416,6 +424,7 @@ public class SensorflareClient {
             intelligenceDetails.put("isa", "Intelligence");
             intelligenceDetails.put("observes", "");
             intelligenceDetails.put("controls", "");
+            intelligenceDetails.put("uom", "");
         }
 
         return intelligenceDetails;

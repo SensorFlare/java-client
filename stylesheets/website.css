@@ -1,0 +1,418 @@
+a {
+    cursor: pointer;
+}
+.section-padBottom {
+    padding-bottom: 40px;
+}
+.section-padBottom-funnel {
+    padding-bottom: 60px;
+}
+.header-10-sub img.logo {
+    width: 38px;
+    padding-right: 10px;
+}
+.form-min.form-control {
+    border: 0 none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid #eeeeee;
+    background-color: #333332;
+    color: #ffffff;
+    font-size: 18px;
+    padding-left: 0;
+}
+.input-group {
+    margin-bottom: 30px;
+}
+.input-group-addon {
+    background-color: #ffffff;
+    color: #7f8c8d;
+}
+.btn-block {
+    font-size: 18px;
+    padding: 12px 18px;
+}
+.trust-text {
+    margin-top: 15px;
+}
+.modal-header .modal-title {
+    font-size: 21px;
+}
+.benefits {
+    background-color: #ffffff;
+}
+.page-header {
+    font-size: 30px;
+    font-weight: 300;
+    margin: 80px 0 0 0;
+}
+.page-sub-header {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0 0 55px 0;
+    text-transform: uppercase;
+    color: #a5abaf;
+}
+.expertise .page-header {
+    margin-bottom: 30px;
+}
+.worksWith .page-header .lead {
+    color: #eeeeee;
+}
+.howWeDoIt-inner p {
+    margin-top: 20px;
+    margin-bottom: 70px;
+}
+.expertise {
+    background-color: #ffffff;
+}
+.acquisition {
+    background-color: #CAECA4;
+}
+.activation {
+    background-color: #333332;
+}
+.retention {
+    background-color: #eeeeee;
+}
+.revenue {
+    /*background-color: #78D01D;*/
+    background-color: rgba(200, 218, 77, 0.7);
+}
+.referral {
+    background-color: rgba(151, 204, 67, 0.8);
+}
+#funnel-triangle {
+    width: 0;
+    height: 0;
+    border-bottom: 1790px solid #ffffff;
+    border-left: 232px solid transparent;
+    position: absolute;
+    right: 0;
+    z-index: 2;
+}
+.funnel-icon {
+    font-size: 60px;
+}
+.acquisition .funnel-icon-list,
+.retention .funnel-icon-list,
+.revenue .funnel-icon-list,
+.referral .funnel-icon-list{
+    font-size: 21px;
+    color: #333332;
+}
+.activation .funnel-icon-list {
+    font-size: 21px;
+    color: #ffffff;
+}
+.acquisition p,
+.activation p,
+.retention p,
+.revenue p,
+.referral p {
+    display: inline;
+    font-size: 21px;
+    color: #333332;
+}
+.acquisition blockquote:before,
+.retention blockquote:before,
+.revenue blockquote:before,
+.referral blockquote:before {
+    background-color: #333332;
+}
+.acquisition blockquote,
+.retention blockquote,
+.revenue blockquote,
+.referral blockquote {
+    font-size: 21px;
+    color: #333332;
+}
+.activation p,
+.activation .page-header {
+    color: #ffffff;
+}
+.activation blockquote:before {
+    background-color: #ffffff;
+}
+.activation blockquote {
+    font-size: 21px;
+    color: #ffffff;
+}
+.error-wrapper {
+    height: 30px;
+    margin-top: -20px;
+}
+.error {
+    color: #fc2157;
+}
+@media (max-width: 1279px) {
+    #funnel-triangle {
+        border: 0 none !important;
+    }
+}
+@media (max-width: 480px) {
+    #funnel-triangle {
+        border: 0 none !important;
+    }
+    .header-10-sub.v-center {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+}
+.alert-success {
+    color: #aad53f;
+    background-color: rgba(51, 51, 50, 1);
+    border: 1px solid #aad53f;
+}
+.freeCons-error h4 {
+    font-size: 21px;
+}
+.benefits-inner img,
+.steps-inner img {
+    margin: 0 auto;
+}
+.benefits-inner h4,
+.steps-inner h4 {
+    margin-top: 50px;
+    font-weight: 300;
+}
+.benefits-inner .col-md-6,
+.steps-inner .col-md-6 {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+.worksWith {
+    background-color: #ffffff;
+}
+.worksWith .logo-block {
+    background-color: #A3DBEE;
+    padding: 25px 0;
+    color: #ffffff;
+    font-size: 40px;
+}
+.worksWith .logo-block.cta-question {
+    padding: 20px;
+    font-size: 30px;
+}
+.worksWith .logo-block .plus {
+    font-size: 72px;
+}
+.worksWith .logo-block img {
+    margin: 0 auto;
+}
+.worksWith .row {
+    margin-bottom: 25px;
+}
+.cta-question a {
+    color: #00afd8;
+    border-bottom: 2px solid #00afd8;
+}
+.steps {
+   background-color: #ffffff;
+   min-height: 620px;
+}
+.steps-block .col-md-11 {
+    border-left: 2px solid #333332;
+}
+.steps-number {
+    font-size: 80px;
+    color: #525151;
+}
+#allInOnePlace.content-23.custom-bg .background {
+    background-image: url('../img/sensorflare-your-smart-devices-in-one-place.png');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 80;
+    filter: alpha(opacity=800);
+    opacity: 0.80;
+    filter: alpha(opacity=80);
+}
+#nav .navbuttons {
+    font-size: 17px;
+    padding: 10px 26px;
+    min-width: 174px;
+}
+#btn-getStarted-nav {
+    display: none;
+}
+.app-button {
+    display: inline;
+}
+.footer-3 .menu {
+    margin-right: 25px;
+    font-size: 16px;
+}
+.sign-up {
+    padding-bottom: 25px;
+}
+.sign-up .hero-unit img {
+    margin: 0 auto;
+}
+.header-10-sub.sign-up .hero-unit h1{
+    font-size: 30px;
+    margin-bottom: 0;
+}
+.sign-up.header-10-sub .hero-unit p {
+    font-size: 16px;
+    line-height: 1.722169;
+}
+.sign-up.header-10-sub .hero-unit p a {
+    color: #000000;
+}
+.sign-up.header-10-sub .hero-unit p.alert-danger {
+    font-size: 16px;
+    color: #a94442;
+}
+.sign-up .form-wrapper {
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.6);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    padding: 25px;
+}
+.sign-up .form-header {
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 30px;
+}
+.sign-up .form-header > div {
+    color: #7f8c8d;
+    margin-top: 0;
+}
+.sign-up input {
+    margin-bottom: 17px;
+}
+.sign-up select {
+    color: #999999;
+    font-size: 16px;
+    padding-left: 10px;
+}
+.sign-up .input-lg {
+    padding: 0 6px;
+}
+.powered-by {
+    font-size: 13px;
+    color: #eeeeee;
+}
+.form-trust {
+    color: #7f8c8d !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    margin-top: 15px;
+}
+.form-trust a {
+    border-bottom: 1px solid #d8d8d8;
+}
+.login-more-options {
+    margin-top: 25px;
+}
+.login-more-options p {
+    line-height: 1.722169 !important;
+}
+.login-more-options a {
+    border-bottom: 1px solid #bababa;
+    color: #2e2e2e;
+    font-size: 14px;
+}
+a.underlined {
+    border-bottom: 1px solid #bababa;
+}
+a.blue {
+    color: #00afd8 !important;
+}
+a.blue:hover,
+a.blude:focus,
+a.blue:active {
+    color: #0192b2 !important;
+}
+.terms-privacy-inner {
+    color: #333332;
+}
+.terms-privacy-inner p {
+    font-size: 14px;
+    line-height: 1.29;
+}
+.terms-privacy-inner ol > li {
+    margin-top: 10px;
+}
+.form-wrapper .alert {
+    font-size: 16px;
+}
+.forkme-tab {
+    position: fixed;
+    top: 160px;
+    right: -4.906542056%;
+}
+#forkme-banner {
+    position: relative;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+    float: left;
+    padding: 10px 50px 10px 10px;
+    color: #fff;
+    background: url('../images/blacktocat.png') #0090ff no-repeat 95% 50%;
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+#firstSect {
+    padding-top: 95px;
+}
+#firstSect .container {
+    max-width: 640px;
+}
+/* Styles for sticky footer */
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -120px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 206px;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+@media (max-width: 1260px) {
+    #wrap {
+        margin: 0 auto;
+    }
+}
+.devpage p {
+    font-size: 18px;
+}
+.devpage ul {
+    font-size: 16px;
+}
+.devpage li {
+    margin-top: 20px;
+}
+.devpage li a {
+    font-size: 21px;
+}
+

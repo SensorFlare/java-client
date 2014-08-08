@@ -343,7 +343,7 @@ a.blue:active {
 }
 .forkme-tab {
     position: fixed;
-    top: 160px;
+    top: 182px;
     right: -4.906542056%;
 }
 #forkme-banner {
@@ -366,7 +366,7 @@ a.blue:active {
     padding-top: 120px;
 }
 #firstSect .container {
-    max-width: 640px;
+    max-width: 760px;
 }
 /* Styles for sticky footer */
 html,
@@ -380,7 +380,7 @@ body {
     height: auto !important;
     height: 100%;
     /* Negative indent footer by it's height */
-    margin: 0 auto -50px;
+    /*margin: 0 auto -50px;*/
 }
 
 /* Set the fixed height of the footer here */
@@ -414,5 +414,19 @@ body {
 }
 .devpage li a {
     font-size: 21px;
+}
+.devpage-header {
+    padding-bottom: 9px;
+    margin: 0 0 20px;
+    border-bottom: 1px solid #eee;
+}
+.card-wrapper {
+    padding-bottom: 50px;
+}
+.card-wrapper h4 {
+    font-weight: 300;
+}
+.sub-nav {
+    margin-bottom: 25px;
 }
 

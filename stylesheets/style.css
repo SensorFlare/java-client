@@ -36,9 +36,10 @@ a:hover {
   color: #1abc9c;
   text-decoration: none;
 }
-/* override styles */
-a:hover {
-    color: #aad53f;
+a:hover,
+a:focus,
+a:active {
+    color: #0192b2;
     text-decoration: none;
 }
 h1,
@@ -79,15 +80,10 @@ h6,
 .h6 {
   line-height: 1.2em;
 }
-h1 {
-  font-weight: 700;
-}
 h2 {
-  font-weight: 700;
   margin-bottom: 2px;
 }
 h3 {
-  font-weight: 700;
   margin-bottom: 4px;
   margin-top: 2px;
 }
@@ -1035,14 +1031,14 @@ section * {
   font-size: 50px;
   line-height: 60px;
   color: #000000;
-  font-family: "Hind", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .header-10-sub .hero-unit p,
 .header-10-sub .hero-unit h2 {
   font-size: 28px;
   font-weight: normal;
   color: #000000;
-  font-family: "Hind", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
   line-height: 41px;
 }
@@ -1051,7 +1047,7 @@ section * {
     font-size: 36px;
     font-weight: normal;
     color: #ffffff;
-    font-family: "Hind", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 300;
   }
   .header-10-sub .hero-unit p {
@@ -1067,7 +1063,7 @@ section * {
   font-weight: normal;
   color: #ffffff;
   font-weight: 500;
-  font-family: "Hind", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   border: 8px solid white;
   display: inline-block;
   margin: 0;

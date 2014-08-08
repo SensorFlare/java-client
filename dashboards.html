@@ -1,257 +1,317 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8'/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
-    <meta name="description" content="Www-sensorflare : "/>
-    <!-- Bootstrap core CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sensorflare offers a REST API. Rest means that the URLs used are properly
+    describing the actions and interactions performed."/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/bootstrap.min.css">
+    <title>Developer API Dashboards | Sensorflare</title>
 
+    <link rel="shortcut icon" href="images/favicon.png"> </link>
 
-    <script src="javascripts/bootstrap.js"></script>
-
-    <title>Sensorflare API</title>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="stylesheets/bootstrap.3.0.3.css">
+    <link rel="stylesheet" href="stylesheets/icon-font.css">
+    <link rel="stylesheet" href="stylesheets/icons.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/website.css">
 
 </head>
 <body>
 
-<!-- HEADER -->
-<div id="header_wrap" class="outer">
-    <header class="inner">
-        <a id="forkme_banner" href="https://github.com/amaxilat/sensorflare-api">View on GitHub</a>
+    <div id="wrap">
 
-        <h1 id="project_title"><a href="index.html" style="text-decoration: none; color: #ffffff">Sensorflare API</a></h1>
+        <!-- header-10 -->
+        <header id="nav" class="header-10 navbar-fixed-top">
+            <div class="container">
+                <div class="navbar col-sm-12" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle"></button>
+                        <a class="brand" href="http://sensorflare.com"><img class="img-responsive" src="images/sensorflare-logo-website.png"
+                                                                            alt="Sensorflare"> </img></a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav pull-left">
+                            <li><a href="http://sensorflare.com#benefits-sec" class="web-menu-item">Benefits</a></li>
+                            <li><a href="http://sensorflare.com#howItWorks-sec" class="web-menu-item">How It Works</a></li>
+                            <li><a href="http://sensorflare.com#devices-sec" class="web-menu-item">Supported Devices</a></li>
+                            <li><a href="http://blog.sensorflare.com" target="_blank" class="web-menu-item">Blog</a></li>
+                        </ul>
+                        <ul class="navbar-form pull-right list-inline">
+                            <li><a href="http://sensorflare.com/user/signup.html" class="btn btn-primary btn-large navbuttons">
+                                Get Started Free</a></li>
+                            <li><a href="https://play.google.com/store/apps/details?id=com.sensorflare.android" id="btn-googlePlay" class="app-button">
+                                <img src="images/sensorflare-on-google-play.png"
+                                     alt="Download it on Google Play" class="img-responsive app-button"> </a></li>
 
-        <h2 id="project_tagline"></h2>
+                        </ul>
+                        <div class="forkme-tab">
+                            <a id="forkme-banner" href="https://github.com/SensorFlare/rest-api">View on GitHub</a>
+                        </div>
 
-        <section id="downloads">
-            <a href="download.html"
-               style="all: none;">
-                Java Client
-            </a>
-            <!--<a class="zip_download_link" href="download.html">Download the Sensorflare Library as zip file</a>-->
-            <!--<a class="tar_download_link" href="download.html">Download the Sensorflare Library as tar.gz file</a>-->
-        </section>
-    </header>
-</div>
+                    </div>
+                </div>
+            </div>
+        </header> <!--/.header-10 -->
 
-<!-- MAIN CONTENT -->
+        <section id="firstSect" class="header-10-sub v-center devpage">
+        <div>
+            <div class="container">
 
-<div id="main_content_wrap" class="outer" style="min-height: 800px">
-    <section id="main_content" class="inner">
+            <div class="sub-nav clearfix">
+                <small class="pull-left"><a href="management.html">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Back to Management API</a></small>
+                <small class="pull-right"><a href=""></a></small>
+            </div>
 
-        <h3>
-            <span class="octicon octicon-link"></span>
-            Dashboards API
-        </h3>
+            <div class="card-wrapper">
 
-        <p>
-            used to retrieve information about user dashboards.
-        </p>
+            <h3 class="devpage-header">Dashboards API</h3>
 
+            <p>
+                It is used to retrieve information about user dashboards.
+            </p>
 
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;"> List All Available Dashboard</p></div>
-                <div class="panel-body">
+            <br/>
 
-                    <pre><code>GET /api/dashboards</code></pre>
+            <div class="bs-example">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">List All Available Dashboards</h4>
+                    </div>
+                    <div class="panel-body">
 
-                    <p>Returns a JSONArray with all the Dashboard created by the user.</p>
+                        <pre><code>GET /api/dashboards</code></pre>
 
-                    <p>Example</p>
+                        <p>Returns a JSONArray with all the Dashboard created by the user.</p>
+
+                        <p>Example:</p>
 
                     <pre><code class="language-javascript">{
-  dashboards:[
-    {id:1,name:"Dashboard1 Name"},
-    {id:2,name:"Dashboard2 Name"},
-    ...
-  ]
-}</code></pre>
+                        dashboards:[
+                        {id:1,name:"Dashboard1 Name"},
+                        {id:2,name:"Dashboard2 Name"},
+                        ...
+                        ]
+                        }</code></pre>
+
+                    </div>
 
                 </div>
-
             </div>
-        </div>
 
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">List all Components A Dashboard</p></div>
-                <div class="panel-body">
+            <div class="bs-example">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">List all Components of a Dashboard</h4>
+                    </div>
+                    <div class="panel-body">
 
-                    <pre><code>GET /api/dashboard/{dashboardId}</code></pre>
+                        <pre><code>GET /api/dashboard/{dashboardId}</code></pre>
 
-                    <p>Returns a JSONArray with all the components of the specified Dashboard.</p>
-                    <p>Example</p>
-                    <pre><code class="language-javascript"><span class="p">{</span><br><span class="s2">  id: 12345,</span><br><span class="s2">  name: "dashboardName",</span><br><span class="s2">  longtitude: 0,</span><br><span class="s2">  latitude: 0,</span><br><span class="s2">  tariff: null,</span><br><span class="s2">  featuredResource: null,</span><br><span class="s2">  parentDashboard: null,</span><br><span class="s2">  open: false</span><br><span class="p">}</span></code></pre>
+                        <p>Returns a JSONArray with all the components of the specified Dashboard.</p>
+                        <p>Example:</p>
+                        <pre><code class="language-javascript"><span class="p">{</span><br><span class="s2">  id: 12345,</span><br><span class="s2">  name: "dashboardName",</span><br><span class="s2">  longtitude: 0,</span><br><span class="s2">  latitude: 0,</span><br><span class="s2">  tariff: null,</span><br><span class="s2">  featuredResource: null,</span><br><span class="s2">  parentDashboard: null,</span><br><span class="s2">  open: false</span><br><span class="p">}</span></code></pre>
+
+                    </div>
 
                 </div>
-
             </div>
-        </div>
 
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Set Location For A Dashboard</p></div>
-                <div class="panel-body">
+            <div class="bs-example">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Set Location for a Dashboard</h4>
+                    </div>
+                    <div class="panel-body">
 
-                    <pre><code>GET api/dashboard/{dashboardId}/location/{longtitude}/{latitude}</code></pre>
+                        <pre><code>GET api/dashboard/{dashboardId}/location/{longtitude}/{latitude}</code></pre>
 
-                    <p>Returns a JSONArray with information about the specified dashboard if the location is set successfully,
-                        otherwise returns <code>"error"</code>.</p>
+                        <p>Returns a JSONArray with information about the specified dashboard if the location is set successfully,
+                            otherwise returns <code>"error"</code>.</p>
 
-                    <p>Example</p>
+                        <p>Example:</p>
 
-                    <pre><code class="language-javascript"><span class="p">{</span><br><span class="s2">  id: 12345,</span><br><span class="s2">  name: "dashboardName",</span><br><span class="s2">  longtitude: 0,</span><br><span class="s2">  latitude: 0,</span><br><span class="s2">  tariff: null,</span><br><span class="s2">  featuredResource: null,</span><br><span class="s2">  parentDashboard: null,</span><br><span class="s2">  open: false</span><br><span class="p">}</span></code></pre>
-                </div>
+                        <pre><code class="language-javascript"><span class="p">{</span><br><span class="s2">  id: 12345,</span><br><span class="s2">  name: "dashboardName",</span><br><span class="s2">  longtitude: 0,</span><br><span class="s2">  latitude: 0,</span><br><span class="s2">  tariff: null,</span><br><span class="s2">  featuredResource: null,</span><br><span class="s2">  parentDashboard: null,</span><br><span class="s2">  open: false</span><br><span class="p">}</span></code></pre>
+                    </div>
 
-            </div>
-        </div>
-
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Create Dashboard</p></div>
-                <div class="panel-body">
-
-                    <pre><code>GET /api/dashboard/create/{dashboardName}</code></pre>
-
-                    <p>Returns a JSONArray with all the information about the created Dashboard.</p>
-
-                    <p>Example</p>
-
-                    <pre><code class="language-javascript"><span class="p">{</span><br><span class="s2">  id: 12345,</span><br><span class="s2">  name: "dashboardName",</span><br><span class="s2">  longtitude: 0,</span><br><span class="s2">  latitude: 0,</span><br><span class="s2">  tariff: null,</span><br><span class="s2">  featuredResource: null,</span><br><span class="s2">  parentDashboard: null,</span><br><span class="s2">  open: false</span><br><span class="p">}</span></code></pre>
                 </div>
             </div>
-        </div>
 
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Delete Dashboard</p></div>
-                <div class="panel-body">
+            <div class="bs-example">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Create Dashboard</h4>
+                    </div>
+                    <div class="panel-body">
 
-                    <pre><code>GET /api/dashboard/delete/{dashboardId}</code></pre>
+                        <pre><code>GET /api/dashboard/create/{dashboardName}</code></pre>
 
-                    <p>Returns <code>{"status":"Ok","code":200}</code> if the specified Dashboard is deleted successfully,
-                        otherwise returns <code>"error"</code>.</p>
-                </div>
+                        <p>Returns a JSONArray with all the information about the created Dashboard.</p>
 
-            </div>
-        </div>
+                        <p>Example:</p>
 
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Add Resource To Dashboard</p></div>
-                <div class="panel-body">
-
-                    <pre><code>GET /api/dashboard/{dashbordId}/add/resource/**</code></pre>
-
-                    <p>Returns the JSON description of the Dashboard if the specified IoT Resource was added successfully,
-                        otherwise returns <code>{"status":"Not Found","code":404}</code>  or <code>{"status":"Forbidden","code":403}</code>.</p>
+                        <pre><code class="language-javascript"><span class="p">{</span><br><span class="s2">  id: 12345,</span><br><span class="s2">  name: "dashboardName",</span><br><span class="s2">  longtitude: 0,</span><br><span class="s2">  latitude: 0,</span><br><span class="s2">  tariff: null,</span><br><span class="s2">  featuredResource: null,</span><br><span class="s2">  parentDashboard: null,</span><br><span class="s2">  open: false</span><br><span class="p">}</span></code></pre>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Disconnect Resource from Dashboard</p></div>
-                <div class="panel-body">
+            <div class="bs-example">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Delete Dashboard</h4>
+                    </div>
+                    <div class="panel-body">
 
-                    <pre><code>GET /api/dashboard/{siteId}/disconnect/**</code></pre>
+                        <pre><code>GET /api/dashboard/delete/{dashboardId}</code></pre>
 
-                    <p>Returns <code>{"status":"Ok","code":200}</code> if the specified Resource is disconnected from Dashboard,
-                        otherwise returns <code>"error"</code>.</p>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">Feature Resource in Dashboard</p></div>
-                <div class="panel-body">
-
-                    <pre><code>GET /api/dashboard/{siteId}/featured/**</code></pre>
-
-                    <p>Returns <code>{"status":"Ok","code":200}</code> if the specified Resource is featured in Dashboard,
-                        otherwise returns <code>"error"</code>.</p>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading"><p class="heading" style="font-variant: small-caps;">List All Resources of a Dashboard</p></div>
-                <div class="panel-body">
-
-                    <pre><code>GET /api/dashboard/{dashboardName}/resource</code></pre>
-
-                    <p>Returns a JSONArray with all the IoT Resources added to the specified Dashboard.</p>
-
-                    <p>Example</p>
-
-                    <pre><code class="language-javascript"><span class="p">[</span><br><span class="s2">  "resourceName",</span><br><span class="s2">  ...</span><br><span class="p"> ]</span></code></pre>
-
+                        <p>Returns <code>{"status":"Ok","code":200}</code> if the specified Dashboard is deleted successfully,
+                            otherwise returns <code>"error"</code>.</p>
+                    </div>
 
                 </div>
-
             </div>
-        </div>
-        <!--TODO: replace With Intelligence-->
-        <!--<div class="bs-example">-->
+
+            <div class="bs-example">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Add Resource to Dashboard</h4>
+                    </div>
+                    <div class="panel-body">
+
+                        <pre><code>GET /api/dashboard/{dashbordId}/add/resource/**</code></pre>
+
+                        <p>Returns the JSON description of the Dashboard if the specified IoT Resource was added successfully,
+                            otherwise returns <code>{"status":"Not Found","code":404}</code>  or <code>{"status":"Forbidden","code":403}</code>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bs-example">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Disconnect Resource from Dashboard</h4>
+                    </div>
+                    <div class="panel-body">
+
+                        <pre><code>GET /api/dashboard/{siteId}/disconnect/**</code></pre>
+
+                        <p>Returns <code>{"status":"Ok","code":200}</code> if the specified Resource is disconnected from Dashboard,
+                            otherwise returns <code>"error"</code>.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="bs-example">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Feature Resource in Dashboard</h4>
+                    </div>
+                    <div class="panel-body">
+
+                        <pre><code>GET /api/dashboard/{siteId}/featured/**</code></pre>
+
+                        <p>Returns <code>{"status":"Ok","code":200}</code> if the specified Resource is featured in Dashboard,
+                            otherwise returns <code>"error"</code>.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="bs-example">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">List All Resources of a Dashboard</h4>
+                    </div>
+                    <div class="panel-body">
+
+                        <pre><code>GET /api/dashboard/{dashboardName}/resource</code></pre>
+
+                        <p>Returns a JSONArray with all the IoT Resources added to the specified Dashboard.</p>
+
+                        <p>Example:</p>
+
+                        <pre><code class="language-javascript"><span class="p">[</span><br><span class="s2">  "resourceName",</span><br><span class="s2">  ...</span><br><span class="p"> ]</span></code></pre>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- todo: replace With Intelligence-->
+            <!--<div class="bs-example">-->
             <!--<div class="panel panel-default">-->
-                <!--&lt;!&ndash; Default panel contents &ndash;&gt;-->
-                <!--<div class="panel-heading"><p class="heading" style="font-variant: small-caps;">List All Applications of a Dashboard</p></div>-->
-                <!--<div class="panel-body">-->
+            <!--&lt;!&ndash; Default panel contents &ndash;&gt;-->
+            <!--<div class="panel-heading"><p class="heading" style="font-variant: small-caps;">List All Applications of a Dashboard</p></div>-->
+            <!--<div class="panel-body">-->
 
-                    <!--<pre><code>GET /api/dashboard/{dashboardName}/application</code></pre>-->
+            <!--<pre><code>GET /api/dashboard/{dashboardName}/application</code></pre>-->
 
-                    <!--<p>Returns a JSONArray with all the Applications deployed by the user.</p>-->
+            <!--<p>Returns a JSONArray with all the Applications deployed by the user.</p>-->
 
-                    <!--<p>Example</p>-->
+            <!--<p>Example</p>-->
 
-                    <!--<pre><code class="language-javascript"><span class="p">[</span><br><span class="s2">  "applicationName",</span><br><span class="s2">  ...</span><br><span class="p"> ]</span></code></pre>-->
-
-                <!--</div>-->
+            <!--<pre><code class="language-javascript"><span class="p">[</span><br><span class="s2">  "applicationName",</span><br><span class="s2">  ...</span><br><span class="p"> ]</span></code></pre>-->
 
             <!--</div>-->
-        <!--</div>-->
 
-    </section>
-</div>
+            <!--</div>-->
+            <!--</div>-->
+                <div class="sub-nav clearfix">
+                    <small class="pull-left"><a href="management.html">
+                        <span class="glyphicon glyphicon-chevron-left"></span> Back to Management API</a></small>
+                    <small class="pull-right"><a href=""></a></small>
+                </div>
+
+            </div><!--/.card-wrapper-->
+            </div><!--/.container-->
+        </div>
+        </section>
+    </div><!--/.wrap -->
 
 
-<!-- FOOTER  -->
-<div id="footer_wrap" class="outer">
-    <footer class="inner">
-        <p><a name="support-or-contact" class="anchor" href="#support-or-contact"><span
-                class="octicon octicon-link"></span></a>Support or Contact: <a href="http://www.sensorflare.com/help">http://www.sensorflare.com/help</a>
-            <br/>
-            or contact
-            <a href="mailto:support@sensorflare.com">support@sensorflare.com</a> and we’ll help you sort it out.
-        </p>
 
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+    <!-- footer-3 -->
+    <footer class="footer-3" id="footer">
+        <div class="container text-center">
+            <!--<span class="menu"> <a href="#">Pricing</a>  </span>-->
+            <!--<span class="menu"> <a href="#">About us</a> </span>-->
+            <span class="menu"> <a href="http://blog.sensorflare.com" target="_blank">Blog</a> </span>
+            <span class="menu"> <a href="#" onclick="showClassicWidget()">Contact &amp; Support</a> </span>
+            <span class="menu"> <a href="https://sensorflare.github.io/rest-api/">Developers</a> </span>
+            <br/><br/>
+
+            <p class="brand">© 2014 Sensorflare · All rights reserved ·
+                <a href="http://sensorflare.com/privacy-policy.html" target="_blank">Privacy Policy</a> ·
+                <a href="http://sensorflare.com/terms-of-service.html" target="_blank">Terms of Service</a>
+            </p>
+
+        </div>
     </footer>
-</div>
 
-<<<<<<< HEAD
+    <!-- Javascript -->
+    <script src="javascripts/jquery-1.11.0.min.js"></script>
+    <script src="javascripts/bootstrap.3.1.1.min.js"></script>
+    <script src="javascripts/modernizr.custom.js"></script>
+    <script src="javascripts/jquery.scrollTo-1.4.3.1-min.js"></script>
+    <script src="javascripts/startup-kit.js"></script>
+    <script src="javascripts/jquery.backgroundvideo.min.js"></script>
+    <script src="javascripts/jquery.parallax.min.js"></script>
+    <script src="javascripts/uservoice.js"></script>
+    <script src="javascripts/website.js" ></script>
 
-=======
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
->>>>>>> 16f7197c3a5b2bb94725f40d0ec574b50d873ecc
 </body>
 </html>

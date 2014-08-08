@@ -4,62 +4,95 @@
 <head>
     <meta charset='utf-8'/>
     <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
-    <meta name="description" content="Www-sensorflare : "/>
+    <meta name="description" content="Sensorflare offers a REST API. Rest means that the URLs used are properly
+    describing the actions and interactions performed. "/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/bootstrap.min.css">
+    <title>Developer API Javadoc | Sensorflare</title>
 
-    <script src="javascripts/bootstrap.js"></script>
-    <title>Sensorflare Libraries</title>
+    <link rel="shortcut icon" href="images/favicon.png"> </link>
+
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="stylesheets/bootstrap.3.0.3.css">
+    <link rel="stylesheet" href="stylesheets/icon-font.css">
+    <link rel="stylesheet" href="stylesheets/icons.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/website.css">
+
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div id="header_wrap" class="outer">
-    <header class="inner">
-        <a id="forkme_banner" href="https://github.com/amaxilat/sensorflare-api">View on GitHub</a>
+    <div id="wrap">
 
-        <h1 id="project_title"><a href="index.html" style="text-decoration: none; color: #ffffff">Sensorflare API</a>
-        </h1>
+        <!-- header-10 -->
+        <header id="nav" class="header-10 navbar-fixed-top">
+            <div class="container">
+                <div class="navbar col-sm-12" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle"></button>
+                        <a class="brand" href="http://sensorflare.com"><img class="img-responsive" src="images/sensorflare-logo-website.png"
+                                                                            alt="Sensorflare"> </img></a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav pull-left">
+                            <li><a href="http://sensorflare.com#benefits-sec" class="web-menu-item">Benefits</a></li>
+                            <li><a href="http://sensorflare.com#howItWorks-sec" class="web-menu-item">How It Works</a></li>
+                            <li><a href="http://sensorflare.com#devices-sec" class="web-menu-item">Supported Devices</a></li>
+                            <li><a href="http://blog.sensorflare.com" target="_blank" class="web-menu-item">Blog</a></li>
+                        </ul>
+                        <ul class="navbar-form pull-right list-inline">
+                            <li><a href="http://sensorflare.com/user/signup.html" class="btn btn-primary btn-large navbuttons">
+                                Get Started Free</a></li>
+                            <li><a href="https://play.google.com/store/apps/details?id=com.sensorflare.android" id="btn-googlePlay" class="app-button">
+                                <img src="images/sensorflare-on-google-play.png"
+                                     alt="Download it on Google Play" class="img-responsive app-button"> </a></li>
 
-        <h2 id="project_tagline"></h2>
+                        </ul>
+                        <div class="forkme-tab">
+                            <a id="forkme-banner" href="https://github.com/SensorFlare/rest-api">View on GitHub</a>
+                        </div>
 
-        <section id="downloads">
-            <a href="download.html"
-               style="all: none;">
-                Java Client
-            </a>
-            <!--<a class="zip_download_link" href="download.html">Download the Sensorflare Library as zip file</a>-->
-            <!--<a class="tar_download_link" href="download.html">Download the Sensorflare Library as tar.gz file</a>-->
-        </section>
-    </header>
-</div>
+                    </div>
+                </div>
+            </div>
+        </header> <!--/.header-10 -->
 
-<!-- MAIN CONTENT -->
-<div id="main_content_wrap" class="outer" style="min-height: 600px">
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer" style="min-height: 600px; padding-top: 119px">
+            <iframe src="client/site/apidocs/com/sensorflare/client/SensorflareClient.html"
+                    style="width:100%; height: 600px"></iframe>
+        </div>
+
+    </div><!--/.wrap -->
 
 
-    <iframe src="client/site/apidocs/com/sensorflare/client/SensorflareClient.html"
-            style="width:100%; height: 600px"></iframe>
-</div>
+    <!-- footer-3 -->
+    <footer class="footer-3" id="footer">
+        <div class="container text-center">
+            <!--<span class="menu"> <a href="#">Pricing</a>  </span>-->
+            <!--<span class="menu"> <a href="#">About us</a> </span>-->
+            <span class="menu"> <a href="http://blog.sensorflare.com" target="_blank">Blog</a> </span>
+            <span class="menu"> <a href="#" onclick="showClassicWidget()">Contact &amp; Support</a> </span>
+            <span class="menu"> <a href="https://sensorflare.github.io/rest-api/">Developers</a> </span>
+            <br/><br/>
 
-<!-- FOOTER  -->
-<div id="footer_wrap" class="outer">
-    <footer class="inner">
-        <p><a name="support-or-contact" class="anchor" href="#support-or-contact"><span
-                class="octicon octicon-link"></span></a>Support or Contact: <a href="http://www.sensorflare.com/help">http://www.sensorflare.com/help</a>
-            <br/>
-            or contact
-            <a href="mailto:support@sensorflare.com">support@sensorflare.com</a> and we’ll help you sort it out.
-        </p>
+            <p class="brand">© 2014 Sensorflare · All rights reserved ·
+                <a href="http://sensorflare.com/privacy-policy.html" target="_blank">Privacy Policy</a> ·
+                <a href="http://sensorflare.com/terms-of-service.html" target="_blank">Terms of Service</a>
+            </p>
 
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+        </div>
     </footer>
-</div>
 
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <!-- Javascript -->
+    <script src="javascripts/jquery-1.11.0.min.js"></script>
+    <script src="javascripts/bootstrap.3.1.1.min.js"></script>
+    <script src="javascripts/modernizr.custom.js"></script>
+    <script src="javascripts/jquery.scrollTo-1.4.3.1-min.js"></script>
+    <script src="javascripts/startup-kit.js"></script>
+    <script src="javascripts/jquery.backgroundvideo.min.js"></script>
+    <script src="javascripts/jquery.parallax.min.js"></script>
+    <script src="javascripts/uservoice.js"></script>
+    <script src="javascripts/website.js" ></script>
 </body>
 </html>

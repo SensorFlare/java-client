@@ -449,5 +449,8 @@ pre.terminal {
 .panel p {
     font-size: 16px;
 }
+.panel .heading {
+    margin-bottom: 0;
+}
 
 

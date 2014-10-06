@@ -111,6 +111,19 @@ public class SensorflareClient {
     }
 
     /**
+     * <p>Check if the client is authenticated for the given username and password</p>
+     *
+     * @param username username as String.
+     * @param password password as String.
+     * @return true if the client is authenticated for the given username and password, false otherwise.
+     */
+    public final boolean isClientFor(final String username, final String password) {
+        final String authToken = new String(Base64.encodeBase64((username + ":" + password).getBytes()));
+
+        return authToken.equals(authorizationToken);
+    }
+
+    /**
      * <p>Checks if the client is authenticated.</p>
      *
      * @return Return true for yes, false for no.
@@ -272,9 +285,9 @@ public class SensorflareClient {
      * <p>Returns a Map<String, String> with the details of a given resource</p>
      *
      * @param resourceUri The resource URI
-     * @return The Map<String, String> with the resource details or null if the resource details are not valid.
-     * @throws java.io.IOException             if the connection cannot be established.
-     * @throws org.json.JSONException          in case the server's response cannot be parsed.
+     * @return The Map<String, String> with the resource details.
+     * @throws java.io.IOException if the connection cannot be established.
+     * @throws org.json.JSONException in case the server's response cannot be parsed.
      * @throws java.lang.IllegalStateException if the connection has not been authenticated.
      */
     public final Map<String, String> getResourceDetails(final String resourceUri) throws IOException, JSONException {
@@ -287,8 +300,8 @@ public class SensorflareClient {
         final StringBuilder uriName; //The name created base on the resource uri
 
 
-        //Get the name if it exists
-        if (resourceDetailsJSONObject.has("name")) {
+        //Get the name if it exists and it is not null
+        if (resourceDetailsJSONObject.has("name") && !resourceDetailsJSONObject.isNull("name")) {
             resourceDetails.put("name", resourceDetailsJSONObject.getString("name"));
             hasName = true;
 
@@ -301,8 +314,8 @@ public class SensorflareClient {
             resourceDetails.put("isa", resourceDetailsJSONObject.getString("isa"));
 
         } else {
-            //Return null if the resource doesn't have a valid type.
-            return null;
+            //Throw a JSONException if the resources doesn't have an isa field
+            throw new JSONException("resource doesn't have an isa field");
         }
 
         //Get what the resource observer if it's a sensor
@@ -319,6 +332,14 @@ public class SensorflareClient {
 
         } else {
             resourceDetails.put("controls", "");
+        }
+
+        //Get the unit of measurement for the resource
+        if (resourceDetailsJSONObject.has("uom")) {
+            resourceDetails.put("uom", resourceDetailsJSONObject.getString("uom"));
+
+        } else {
+            resourceDetails.put("uom", "");
         }
 
         //Set a name based on the resource type or uri if the resource doesn't have a name
@@ -403,6 +424,7 @@ public class SensorflareClient {
             intelligenceDetails.put("isa", "Intelligence");
             intelligenceDetails.put("observes", "");
             intelligenceDetails.put("controls", "");
+            intelligenceDetails.put("uom", "");
         }
 
         return intelligenceDetails;

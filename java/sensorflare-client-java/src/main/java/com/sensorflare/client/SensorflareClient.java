@@ -300,8 +300,8 @@ public class SensorflareClient {
         final StringBuilder uriName; //The name created base on the resource uri
 
 
-        //Get the name if it exists
-        if (resourceDetailsJSONObject.has("name")) {
+        //Get the name if it exists and it is not null
+        if (resourceDetailsJSONObject.has("name") && !resourceDetailsJSONObject.isNull("name")) {
             resourceDetails.put("name", resourceDetailsJSONObject.getString("name"));
             hasName = true;
 
